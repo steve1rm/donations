@@ -27,7 +27,6 @@ android {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
-
 }
 
 dependencies {
@@ -37,7 +36,7 @@ dependencies {
     def okhttpVersion = "3.12.1"
     def rxjavaVersion = "2.2.4"
     def rxAndroidVersion = "2.1.1"
-
+    def rxkotlinVersion = "2.3.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -51,6 +50,11 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$daggerAndroidVersion"
     kapt "com.google.dagger:dagger-android-processor:$daggerAndroidVersion"
     implementation "com.google.dagger:dagger-android-support:$daggerAndroidVersion"
+    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+    implementation "io.reactivex.rxjava2:rxjava:$rxjavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlinVersion"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

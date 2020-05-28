@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Tamboon</string>
+    <string name="baseUrl" translatable="false">https://virtserver.swaggerhub.com/chakritw/tamboon-api/1.0.0</string>
 </resources>
