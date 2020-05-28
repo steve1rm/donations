@@ -6,6 +6,7 @@ import dagger.Provides
 import dagger.Reusable
 import me.androidbox.tamboon.BuildConfig
 import me.androidbox.tamboon.R
+import me.androidbox.tamboon.data.network.TamboonService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -55,4 +56,9 @@ class NetworkModule {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
     }
+
+    @Reusable
+    @Provides
+    fun provideWeatherForecastService(retrofit: Retrofit): TamboonService =
+        retrofit.create(TamboonService::class.java)
 }
