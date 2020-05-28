@@ -1,0 +1,2 @@
+rootProject.name='Tamboon'
+include ':app'
