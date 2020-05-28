@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="me.androidbox.tamboon">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".di.TamboonApplication"
         android:allowBackup="true"

@@ -7,6 +7,8 @@ import dagger.Reusable
 import me.androidbox.tamboon.BuildConfig
 import me.androidbox.tamboon.R
 import me.androidbox.tamboon.data.network.TamboonService
+import me.androidbox.tamboon.data.request.RequestCharitiesImp
+import me.androidbox.tamboon.domain.interactors.RequestCharities
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -61,4 +63,9 @@ class NetworkModule {
     @Provides
     fun provideWeatherForecastService(retrofit: Retrofit): TamboonService =
         retrofit.create(TamboonService::class.java)
+
+    @Reusable
+    @Provides
+    fun provideRequestCharities(tamboonService: TamboonService): RequestCharities =
+        RequestCharitiesImp(tamboonService)
 }

@@ -32,11 +32,12 @@ android {
 dependencies {
     def gsonVersion = "2.8.5"
     def retrofitVersion = "2.5.0"
-    def daggerAndroidVersion = "2.21"
+    def daggerAndroidVersion = "2.27"
     def okhttpVersion = "3.12.1"
     def rxjavaVersion = "2.2.4"
     def rxAndroidVersion = "2.1.1"
     def rxkotlinVersion = "2.3.0"
+    def timberVersion = "4.7.1"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -55,6 +56,7 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:$rxjavaVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
     implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlinVersion"
+    implementation "com.jakewharton.timber:timber:$timberVersion"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
