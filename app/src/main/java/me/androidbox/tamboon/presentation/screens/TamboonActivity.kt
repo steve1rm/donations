@@ -3,20 +3,20 @@ package me.androidbox.tamboon.presentation.screens
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import io.reactivex.disposables.CompositeDisposable
 import me.androidbox.tamboon.R
 import me.androidbox.tamboon.di.TamboonActivityModule
 import me.androidbox.tamboon.di.TamboonApplication
 import me.androidbox.tamboon.di.TamboonApplicationComponent
+import me.androidbox.tamboon.presentation.routers.LoadingFragmentRouter
 import timber.log.Timber
 import javax.inject.Inject
 
 class TamboonActivity : AppCompatActivity() {
-
     @Inject
     lateinit var tamboonViewModel: TamboonViewModel
 
-    private val compositeDisposable = CompositeDisposable()
+    @Inject
+    lateinit var loadingFragmentRouter: LoadingFragmentRouter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,15 +25,14 @@ class TamboonActivity : AppCompatActivity() {
 
         tamboonViewModel.registerForCharities().observe(this@TamboonActivity, Observer {
             Timber.d("Charities $it")
+
         })
 
         tamboonViewModel.getListOfCharities()
+        startLoading()
     }
 
-    override fun onDestroy() {
-        compositeDisposable.clear()
-        super.onDestroy()
-    }
+    private fun startLoading() = loadingFragmentRouter.gotoLoadingFragment()
 
     private fun injectDependencies() {
         val tamboonActivitySubComponent = getTamboonApplicationComponent()

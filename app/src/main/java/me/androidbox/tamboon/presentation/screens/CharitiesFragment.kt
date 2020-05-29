@@ -15,9 +15,6 @@ import javax.inject.Inject
 
 class CharitiesFragment : Fragment() {
 
-    @Inject
-    lateinit var tamboonViewModel: TamboonViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         injectDependencies()
@@ -31,12 +28,6 @@ class CharitiesFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        tamboonViewModel.registerForCharities().observe(this@CharitiesFragment, Observer {
-            Timber.d("Charities $it")
-        })
-
-        tamboonViewModel.getListOfCharities()
     }
 
     private fun injectDependencies() {

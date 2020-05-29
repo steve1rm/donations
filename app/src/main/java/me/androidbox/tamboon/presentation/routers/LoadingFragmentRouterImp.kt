@@ -10,6 +10,7 @@ class LoadingFragmentRouterImp(private val fragmentManager: FragmentManager) :
     override fun gotoLoadingFragment() {
         fragmentManager.let {
             val fragmentTransaction = it.beginTransaction()
+
             fragmentTransaction.replace(R.id.activity_tamboon_container, LoadingFragment(), "LoadingFragment")
             fragmentTransaction.commit()
         }
