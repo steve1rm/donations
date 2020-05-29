@@ -14,9 +14,8 @@ class CharitiesFragmentRouterImp(private val fragmentManager: FragmentManager) :
     override fun goToCharitiesFragment(charityList: List<Charity>) {
         val charitiesFragment = CharitiesFragment()
 
-        charitiesFragment.arguments = Bundle().let {
-            it.putParcelable(TamboonActivity.TAMBOON_CHARITY_KEY, Parcels.wrap(charityList))
-            it
+        charitiesFragment.arguments = Bundle().apply {
+            putParcelable(TamboonActivity.TAMBOON_CHARITY_KEY, Parcels.wrap(charityList))
         }
 
         fragmentManager.run {
