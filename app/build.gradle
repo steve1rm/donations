@@ -39,6 +39,7 @@ dependencies {
     def rxkotlinVersion = "2.3.0"
     def timberVersion = "4.7.1"
     def lifecycleVersion = "2.1.0"
+    def omiseVersion = "3.0.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -59,6 +60,8 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlinVersion"
     implementation "com.jakewharton.timber:timber:$timberVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    implementation "co.omise:omise-android:$omiseVersion"
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
