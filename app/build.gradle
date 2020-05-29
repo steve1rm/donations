@@ -30,6 +30,7 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     def gsonVersion = "2.8.5"
     def retrofitVersion = "2.5.0"
     def daggerAndroidVersion = "2.27"

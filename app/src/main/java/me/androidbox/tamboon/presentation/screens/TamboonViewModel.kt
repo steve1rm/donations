@@ -1,4 +1,4 @@
-package me.androidbox.tamboon.presentation
+package me.androidbox.tamboon.presentation.screens
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

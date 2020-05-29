@@ -5,8 +5,8 @@ import dagger.Module
 import dagger.Provides
 import me.androidbox.tamboon.domain.interactors.RequestCharities
 import me.androidbox.tamboon.domain.interactors.RequestDonation
-import me.androidbox.tamboon.presentation.TamboonActivity
-import me.androidbox.tamboon.presentation.TamboonViewModel
+import me.androidbox.tamboon.presentation.screens.TamboonActivity
+import me.androidbox.tamboon.presentation.screens.TamboonViewModel
 import me.androidbox.tamboon.scopes.ActivityScope
 import me.androidbox.tamboon.utils.ViewModelProviderFactory
 
@@ -20,7 +20,10 @@ class TamboonActivityModule(private val tamboonActivity: TamboonActivity) {
         return ViewModelProviders.of(
             tamboonActivity,
             ViewModelProviderFactory(TamboonViewModel::class) {
-                TamboonViewModel(requestCharities, requestDonation)
+                TamboonViewModel(
+                    requestCharities,
+                    requestDonation
+                )
             }).get(TamboonViewModel::class.java)
     }
 }

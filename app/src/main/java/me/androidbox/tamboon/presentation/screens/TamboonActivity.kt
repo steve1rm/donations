@@ -1,4 +1,4 @@
-package me.androidbox.tamboon.presentation
+package me.androidbox.tamboon.presentation.screens
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
