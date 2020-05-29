@@ -5,15 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.fragment_charities.*
 import me.androidbox.tamboon.R
+import me.androidbox.tamboon.data.entities.Charity
+import me.androidbox.tamboon.di.CharitiesFragmentModule
 import me.androidbox.tamboon.di.TamboonApplication
 import me.androidbox.tamboon.di.TamboonApplicationComponent
-import me.androidbox.tamboon.di.CharitiesFragmentModule
-import timber.log.Timber
+import me.androidbox.tamboon.presentation.adapter.CharitiesAdapter
+import org.parceler.Parcels
 import javax.inject.Inject
 
 class CharitiesFragment : Fragment() {
+
+    @Inject
+    lateinit var charitiesAdapter: CharitiesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +35,17 @@ class CharitiesFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        arguments?.let {
+            val charities =
+                Parcels.unwrap<List<Charity>>(it.getParcelable(TamboonActivity.TAMBOON_CHARITY_KEY))
+
+            rvCharities.adapter = charitiesAdapter
+            rvCharities.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+            rvCharities.addItemDecoration(DividerItemDecoration(activity, LinearLayoutManager.VERTICAL))
+            charitiesAdapter.populate(charities)
+            charitiesAdapter.notifyDataSetChanged()
+        }
     }
 
     private fun injectDependencies() {
@@ -38,7 +56,7 @@ class CharitiesFragment : Fragment() {
     }
 
     private fun getTamboonApplicationComponent(): TamboonApplicationComponent {
-        /* Something bad happened !! */
+        /* Something bad happened !! we should not proceed */
         return (activity!!.application as TamboonApplication).tamboonApplicationComponent
     }
 }

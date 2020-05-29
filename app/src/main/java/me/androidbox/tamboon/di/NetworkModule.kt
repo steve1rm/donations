@@ -63,7 +63,7 @@ class NetworkModule {
 
     @Reusable
     @Provides
-    fun provideWeatherForecastService(retrofit: Retrofit): TamboonService =
+    fun provideTamboonService(retrofit: Retrofit): TamboonService =
         retrofit.create(TamboonService::class.java)
 
     @Reusable

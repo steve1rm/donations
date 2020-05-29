@@ -5,10 +5,12 @@ import dagger.Module
 import dagger.Provides
 import me.androidbox.tamboon.domain.interactors.RequestCharities
 import me.androidbox.tamboon.domain.interactors.RequestDonation
+import me.androidbox.tamboon.presentation.routers.CharitiesFragmentRouter
+import me.androidbox.tamboon.presentation.routers.CharitiesFragmentRouterImp
 import me.androidbox.tamboon.presentation.routers.LoadingFragmentRouter
 import me.androidbox.tamboon.presentation.routers.LoadingFragmentRouterImp
 import me.androidbox.tamboon.presentation.screens.TamboonActivity
-import me.androidbox.tamboon.presentation.screens.TamboonViewModel
+import me.androidbox.tamboon.presentation.viewmodels.TamboonViewModel
 import me.androidbox.tamboon.scopes.ActivityScope
 import me.androidbox.tamboon.utils.ViewModelProviderFactory
 
@@ -34,4 +36,9 @@ class TamboonActivityModule(private val tamboonActivity: TamboonActivity) {
     @Provides
     fun provideLoadingFragmentRouter(): LoadingFragmentRouter =
         LoadingFragmentRouterImp(tamboonActivity.supportFragmentManager)
+
+    @ActivityScope
+    @Provides
+    fun provideCharitiesFragmentRouter(): CharitiesFragmentRouter =
+        CharitiesFragmentRouterImp(tamboonActivity.supportFragmentManager)
 }

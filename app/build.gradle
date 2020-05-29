@@ -27,6 +27,10 @@ android {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -34,13 +38,14 @@ dependencies {
     def gsonVersion = "2.8.5"
     def retrofitVersion = "2.5.0"
     def daggerAndroidVersion = "2.27"
-    def okhttpVersion = "3.12.1"
-    def rxjavaVersion = "2.2.4"
+    def okhttpVersion = "3.14.0"
+    def rxjavaVersion = "2.2.10"
     def rxAndroidVersion = "2.1.1"
-    def rxkotlinVersion = "2.3.0"
+    def rxkotlinVersion = "2.4.0"
     def timberVersion = "4.7.1"
-    def lifecycleVersion = "2.1.0"
+    def lifecycleVersion = "2.2.0"
     def omiseVersion = "3.0.0"
+    def parcelerVersion = "1.1.12"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -62,6 +67,9 @@ dependencies {
     implementation "com.jakewharton.timber:timber:$timberVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
     implementation "co.omise:omise-android:$omiseVersion"
+    kapt "org.parceler:parceler:$parcelerVersion"
+    implementation "org.parceler:parceler-api:$parcelerVersion"
+
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
