@@ -9,11 +9,11 @@ import javax.inject.Singleton
 @Module
 class TamboonApplicationModule(private val application: Application) {
 
-    @Provides
     @Singleton
+    @Provides
     fun provideApplicationContext(): Application = application
 
-    @Provides
     @Singleton
+    @Provides
     fun provideContext(): Context = application
 }

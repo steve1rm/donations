@@ -13,8 +13,7 @@ class TamboonApplication : Application() {
 
         tamboonApplicationComponent = DaggerTamboonApplicationComponent
             .builder()
-            .tamboonApplicationModule(TamboonApplicationModule(this))
-            .networkModule(NetworkModule())
+            .tamboonApplicationModule(TamboonApplicationModule(this@TamboonApplication))
             .build()
     }
 }

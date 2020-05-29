@@ -1,7 +1,6 @@
 package me.androidbox.tamboon.di
 
 import dagger.Component
-import me.androidbox.tamboon.presentation.TamboonActivity
 import javax.inject.Singleton
 
 @Singleton
@@ -9,5 +8,6 @@ import javax.inject.Singleton
     TamboonApplicationModule::class,
     NetworkModule::class])
 interface TamboonApplicationComponent {
-    fun inject(tamboonActivity: TamboonActivity)
+    fun tamboonActivitySubComponent(tamboonActivityModule: TamboonActivityModule): TamboonActivitySubComponent
 }
+
