@@ -8,7 +8,9 @@ import me.androidbox.tamboon.BuildConfig
 import me.androidbox.tamboon.R
 import me.androidbox.tamboon.data.network.TamboonService
 import me.androidbox.tamboon.data.request.RequestCharitiesImp
+import me.androidbox.tamboon.data.request.RequestDonationImp
 import me.androidbox.tamboon.domain.interactors.RequestCharities
+import me.androidbox.tamboon.domain.interactors.RequestDonation
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -68,4 +70,9 @@ class NetworkModule {
     @Provides
     fun provideRequestCharities(tamboonService: TamboonService): RequestCharities =
         RequestCharitiesImp(tamboonService)
+
+    @Reusable
+    @Provides
+    fun provideRequestDonation(tamboonService: TamboonService): RequestDonation =
+        RequestDonationImp(tamboonService)
 }

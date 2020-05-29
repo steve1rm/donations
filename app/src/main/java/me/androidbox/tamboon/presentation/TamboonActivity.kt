@@ -7,10 +7,12 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import me.androidbox.tamboon.R
+import me.androidbox.tamboon.data.entities.Donation
 import me.androidbox.tamboon.data.request.RequestCharitiesImp
 import me.androidbox.tamboon.di.TamboonApplication
 import me.androidbox.tamboon.di.TamboonApplicationComponent
 import me.androidbox.tamboon.domain.interactors.RequestCharities
+import me.androidbox.tamboon.domain.interactors.RequestDonation
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -21,6 +23,9 @@ class TamboonActivity : AppCompatActivity() {
     @Inject
     lateinit var requestCharities: RequestCharities
 
+    @Inject
+    lateinit var requestDonation: RequestDonation
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tamboon)
@@ -30,6 +35,18 @@ class TamboonActivity : AppCompatActivity() {
             .inject(this)
 
         compositeDisposable.add(requestCharities.getCharities()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = {
+                    Timber.d("onSuccess $it")
+                },
+                onError = {
+                    Timber.e(it.localizedMessage)
+                }
+            ))
+
+        compositeDisposable.add(requestDonation.makeDonation(Donation("steve", "484858hdh4hdh", 20))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
