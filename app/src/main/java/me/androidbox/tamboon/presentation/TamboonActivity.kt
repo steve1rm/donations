@@ -2,12 +2,14 @@ package me.androidbox.tamboon.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import io.reactivex.disposables.CompositeDisposable
 import me.androidbox.tamboon.R
 import me.androidbox.tamboon.di.TamboonActivityModule
 import me.androidbox.tamboon.di.TamboonActivitySubComponent
 import me.androidbox.tamboon.di.TamboonApplication
 import me.androidbox.tamboon.di.TamboonApplicationComponent
+import timber.log.Timber
 import javax.inject.Inject
 
 class TamboonActivity : AppCompatActivity() {
@@ -20,8 +22,11 @@ class TamboonActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tamboon)
-
         injectDependencies(buildTamboonSubComponent())
+
+        tamboonViewModel.registerForCharities().observe(this@TamboonActivity, Observer {
+            Timber.d("Charities $it")
+        })
 
         tamboonViewModel.getListOfCharities()
     }
@@ -32,7 +37,7 @@ class TamboonActivity : AppCompatActivity() {
     }
 
     private fun injectDependencies(tamboonActivitySubComponent: TamboonActivitySubComponent) {
-        tamboonActivitySubComponent.inject(this)
+        tamboonActivitySubComponent.inject(this@TamboonActivity)
     }
 
     private fun buildTamboonSubComponent(): TamboonActivitySubComponent {

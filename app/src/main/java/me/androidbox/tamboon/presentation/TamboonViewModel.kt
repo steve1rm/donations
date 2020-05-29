@@ -51,4 +51,8 @@ class TamboonViewModel(
                 }
             ))
     }
+
+    fun registerForCharities(): MutableLiveData<Charities> = charitiesData
+
+    fun registerForDonations(): MutableLiveData<DonationResult> = donationData
 }
