@@ -16,9 +16,7 @@ class CharitiesAdapter : RecyclerView.Adapter<CharitiesViewHolder>() {
             LayoutInflater.from(parent.context).inflate(R.layout.charity_item, parent, false))
     }
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
-    }
+    override fun getItemCount(): Int = charitiesList.charityList.count()
 
     override fun onBindViewHolder(holder: CharitiesViewHolder, position: Int) {
         holder.id.text = charitiesList.charityList[position].id.toString()

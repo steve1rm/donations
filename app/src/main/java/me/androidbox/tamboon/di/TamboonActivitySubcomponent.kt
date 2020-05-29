@@ -6,6 +6,6 @@ import me.androidbox.tamboon.scopes.ActivityScope
 
 @ActivityScope
 @Subcomponent(modules = [TamboonActivityModule::class])
-interface TamboonActivitySubComponent {
+interface TamboonActivitySubcomponent {
     fun inject(tamboonActivity: TamboonActivity)
 }
