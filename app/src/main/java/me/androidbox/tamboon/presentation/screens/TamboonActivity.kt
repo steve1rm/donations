@@ -5,17 +5,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import me.androidbox.tamboon.R
 import me.androidbox.tamboon.data.entities.Charity
+import me.androidbox.tamboon.data.entities.Donation
 import me.androidbox.tamboon.di.TamboonActivityModule
 import me.androidbox.tamboon.di.TamboonApplication
 import me.androidbox.tamboon.di.TamboonApplicationComponent
 import me.androidbox.tamboon.presentation.routers.CharitiesFragmentRouter
 import me.androidbox.tamboon.presentation.routers.DonationFragmentRouter
 import me.androidbox.tamboon.presentation.routers.LoadingFragmentRouter
+import me.androidbox.tamboon.presentation.routers.SuccessFragmentRouter
+import me.androidbox.tamboon.presentation.screens.listeners.CharitySelectedListener
+import me.androidbox.tamboon.presentation.screens.listeners.SubmitDonationListener
 import me.androidbox.tamboon.presentation.viewmodels.TamboonViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
-class TamboonActivity : AppCompatActivity(), CharitySelectedListener {
+class TamboonActivity : AppCompatActivity(),
+    CharitySelectedListener, SubmitDonationListener {
 
     companion object {
         const val TAMBOON_CHARITY_KEY = "tamboonCharityKey"
@@ -32,6 +37,9 @@ class TamboonActivity : AppCompatActivity(), CharitySelectedListener {
     lateinit var charitiesFragmentRouter: CharitiesFragmentRouter
 
     @Inject
+    lateinit var successFragmentRouter: SuccessFragmentRouter
+
+    @Inject
     lateinit var donationFragmentRouter: DonationFragmentRouter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +52,11 @@ class TamboonActivity : AppCompatActivity(), CharitySelectedListener {
             startCharities(it.charityList)
         })
 
+        tamboonViewModel.registerForDonations().observe(this@TamboonActivity, Observer {
+            Timber.d("DonationResult $it")
+            successFragmentRouter.gotoSuccessFragment()
+        })
+
         tamboonViewModel.getListOfCharities()
         startLoading()
     }
@@ -51,6 +64,12 @@ class TamboonActivity : AppCompatActivity(), CharitySelectedListener {
     override fun onCharitySelected(charity: Charity) {
         Timber.d(charity.name)
         startDonation(charity)
+    }
+
+    override fun onSubmitDonation(donation: Donation) {
+        startLoading()
+        /* TODO Throttle the button clicking don't want to send too many requests */
+        tamboonViewModel.submitDonation(donation)
     }
 
     private fun startLoading() = loadingFragmentRouter.gotoLoadingFragment()

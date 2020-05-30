@@ -14,6 +14,7 @@ import me.androidbox.tamboon.di.FragmentModule
 import me.androidbox.tamboon.di.TamboonApplication
 import me.androidbox.tamboon.di.TamboonApplicationComponent
 import me.androidbox.tamboon.presentation.adapter.CharitiesAdapter
+import me.androidbox.tamboon.presentation.screens.listeners.CharitySelectedListener
 import org.parceler.Parcels
 import timber.log.Timber
 import javax.inject.Inject

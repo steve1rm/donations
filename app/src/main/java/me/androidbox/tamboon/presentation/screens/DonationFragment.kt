@@ -5,7 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
+import co.omise.android.api.Client
+import co.omise.android.api.RequestListener
+import co.omise.android.models.CardParam
+import co.omise.android.models.Token
+import kotlinx.android.synthetic.main.charity_item.*
 import kotlinx.android.synthetic.main.fragment_donation.*
 import me.androidbox.tamboon.R
 import me.androidbox.tamboon.data.entities.Charity
@@ -13,15 +17,16 @@ import me.androidbox.tamboon.data.entities.Donation
 import me.androidbox.tamboon.di.FragmentModule
 import me.androidbox.tamboon.di.TamboonApplication
 import me.androidbox.tamboon.di.TamboonApplicationComponent
+import me.androidbox.tamboon.presentation.screens.listeners.SubmitDonationListener
 import me.androidbox.tamboon.presentation.viewmodels.TamboonViewModel
 import org.parceler.Parcels
 import timber.log.Timber
+import java.util.*
 import javax.inject.Inject
 
 class DonationFragment : Fragment() {
-
     @Inject
-    lateinit var tamboonViewModel: TamboonViewModel
+    lateinit var submitDonationListener: SubmitDonationListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,13 +46,33 @@ class DonationFragment : Fragment() {
             val charity =
                 Parcels.unwrap<Charity>(it.getParcelable(TamboonActivity.TAMBOON_DONATION_KEY))
 
-            tamboonViewModel.registerForDonations().observe(viewLifecycleOwner, Observer { donationResult ->
-                Timber.d("donation result ${donationResult.errorMessage}")
+            tvCharityName.text = charity.name
+
+            val client = Client(UUID.randomUUID().toString())
+            val cardParm = CardParam(
+                etCardName.cardName,
+                etCreditCard.cardNumber,
+                etExpiryDate.expiryMonth,
+                etExpiryDate.expiryYear,
+                etSecurityCode.securityCode)
+
+            val token = Token.CreateTokenRequestBuilder(cardParm).build()
+
+            client.send(token, object: RequestListener<Token> {
+                override fun onRequestFailed(throwable: Throwable) {
+                    Timber.e(throwable, throwable.localizedMessage)
+                }
+
+                override fun onRequestSucceed(model: Token) {
+                    Timber.d("onRequestSucceed $model")
+                }
             })
 
-            tvCharityName.text = charity.name
             btnSubmitDonation.setOnClickListener {
-                tamboonViewModel.submitDonation(Donation(tvCharityName.text.toString(), "", etAmount.text.toString().toInt()))
+                submitDonationListener.onSubmitDonation(Donation(
+                    tvCharityName.text.toString(),
+                    token.toString(),
+                    etAmount.text.toString().toInt()))
             }
         } ?: run {
             /* Something went wrong handle case where arguments are null */
