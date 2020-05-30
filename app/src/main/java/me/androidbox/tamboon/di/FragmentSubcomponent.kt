@@ -6,8 +6,8 @@ import me.androidbox.tamboon.presentation.screens.DonationFragment
 import me.androidbox.tamboon.scopes.FragmentScope
 
 @FragmentScope
-@Subcomponent(modules = [CharitiesFragmentModule::class])
-interface CharitiesFragmentSubcomponent {
+@Subcomponent(modules = [FragmentModule::class])
+interface FragmentSubcomponent {
     fun inject(charitiesFragment: CharitiesFragment)
     fun inject(donationFragment: DonationFragment)
 }

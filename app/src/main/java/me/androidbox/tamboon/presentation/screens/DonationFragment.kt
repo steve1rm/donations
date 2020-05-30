@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.fragment_donation.*
 import me.androidbox.tamboon.R
 import me.androidbox.tamboon.data.entities.Charity
 import me.androidbox.tamboon.data.entities.Donation
-import me.androidbox.tamboon.di.CharitiesFragmentModule
+import me.androidbox.tamboon.di.FragmentModule
 import me.androidbox.tamboon.di.TamboonApplication
 import me.androidbox.tamboon.di.TamboonApplicationComponent
 import me.androidbox.tamboon.presentation.viewmodels.TamboonViewModel
@@ -56,7 +56,7 @@ class DonationFragment : Fragment() {
 
     private fun injectDependencies() {
         val charitiesFragmentSubcomponent = getTamboonApplicationComponent()
-            .charitiesFragmentSubcomponent(CharitiesFragmentModule(this@DonationFragment))
+            .charitiesFragmentSubcomponent(FragmentModule(this@DonationFragment))
 
         charitiesFragmentSubcomponent.inject(this@DonationFragment)
     }

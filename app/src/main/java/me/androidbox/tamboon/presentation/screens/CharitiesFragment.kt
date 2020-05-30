@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_charities.*
 import me.androidbox.tamboon.R
 import me.androidbox.tamboon.data.entities.Charity
-import me.androidbox.tamboon.di.CharitiesFragmentModule
+import me.androidbox.tamboon.di.FragmentModule
 import me.androidbox.tamboon.di.TamboonApplication
 import me.androidbox.tamboon.di.TamboonApplicationComponent
 import me.androidbox.tamboon.presentation.adapter.CharitiesAdapter
@@ -60,7 +60,7 @@ class CharitiesFragment : Fragment() {
 
     private fun injectDependencies() {
         val charitiesFragmentSubcomponent = getTamboonApplicationComponent()
-            .charitiesFragmentSubcomponent(CharitiesFragmentModule(this@CharitiesFragment))
+            .charitiesFragmentSubcomponent(FragmentModule(this@CharitiesFragment))
 
         charitiesFragmentSubcomponent.inject(this@CharitiesFragment)
     }

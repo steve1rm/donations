@@ -14,7 +14,7 @@ import me.androidbox.tamboon.scopes.FragmentScope
 import me.androidbox.tamboon.utils.ViewModelProviderFactory
 
 @Module
-class CharitiesFragmentModule(private val charitiesFragment: Fragment) {
+class FragmentModule(private val fragment: Fragment) {
 
     @FragmentScope
     @Provides
@@ -23,7 +23,7 @@ class CharitiesFragmentModule(private val charitiesFragment: Fragment) {
     @FragmentScope
     @Provides
     fun provideCharitiesSelectedListener(): CharitySelectedListener =
-        charitiesFragment.activity as TamboonActivity
+        fragment.activity as TamboonActivity
 
     @FragmentScope
     @Provides
@@ -32,7 +32,7 @@ class CharitiesFragmentModule(private val charitiesFragment: Fragment) {
         requestDonation: RequestDonation
     ): TamboonViewModel {
         return ViewModelProviders.of(
-            charitiesFragment,
+            fragment,
             ViewModelProviderFactory(TamboonViewModel::class) {
                 TamboonViewModel(
                     requestCharities,
