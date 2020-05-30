@@ -37,8 +37,8 @@ class TamboonViewModel(
             ))
     }
 
-    fun submitDonation() {
-        compositeDisposable.add(requestDonation.makeDonation(Donation("steve", "484858hdh4hdh", 20))
+    fun submitDonation(donation: Donation) {
+        compositeDisposable.add(requestDonation.makeDonation(donation)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
