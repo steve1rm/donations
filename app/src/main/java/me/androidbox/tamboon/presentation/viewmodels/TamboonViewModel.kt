@@ -12,6 +12,7 @@ import me.androidbox.tamboon.data.entities.DonationResult
 import me.androidbox.tamboon.domain.interactors.RequestCharities
 import me.androidbox.tamboon.domain.interactors.RequestDonation
 import timber.log.Timber
+import java.util.concurrent.TimeUnit
 
 class TamboonViewModel(
     private val requestCharities: RequestCharities,
@@ -39,10 +40,11 @@ class TamboonViewModel(
 
     fun submitDonation(donation: Donation) {
         compositeDisposable.add(requestDonation.makeDonation(donation)
+            .throttleFirst(1, TimeUnit.SECONDS)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = { donationResult ->
+                onNext = { donationResult ->
                     Timber.d("onSuccess $donationResult")
                     donationData.postValue(donationResult)
                 },

@@ -1,5 +1,6 @@
 package me.androidbox.tamboon.data.network
 
+import io.reactivex.Flowable
 import io.reactivex.Single
 import me.androidbox.tamboon.data.entities.Charities
 import me.androidbox.tamboon.data.entities.Donation
@@ -13,7 +14,7 @@ interface TamboonService {
     fun getCharities(): Single<Charities>
 
     @POST(TamboonServiceUrls.DONATIONS)
-    fun donate(@Body donation: Donation): Single<DonationResult>
+    fun donate(@Body donation: Donation): Flowable<DonationResult>
 }
 
 
