@@ -1,29 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_donation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <co.omise.android.ui.OmiseEditText
+    <TextView
+        android:id="@+id/tvCharityName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space8"
+        android:fontFamily="sans-serif"
+        android:textSize="@dimen/title"
+        android:gravity="center_horizontal"
+        tools:text="Name of charity"/>
 
     <co.omise.android.ui.CardNameEditText
+        android:id="@+id/etCardName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:textSize="@dimen/credit_info"
+        android:hint="@string/name_of_credit_card_holder"/>
 
     <co.omise.android.ui.CreditCardEditText
+        android:id="@+id/etCreditCard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:textSize="@dimen/credit_info"
+        android:hint="@string/credit_card_number"/>
 
     <co.omise.android.ui.ExpiryDateEditText
+        android:id="@+id/etExpiryDate"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:textSize="@dimen/credit_info"
+        android:hint="@string/expired_date"/>
 
     <co.omise.android.ui.SecurityCodeEditText
+        android:id="@+id/etSecurityCode"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:textSize="@dimen/credit_info"
+        android:hint="@string/security_code"/>
 
+    <EditText
+        android:id="@+id/etAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space8"
+        android:fontFamily="sans-serif"
+        android:textSize="@dimen/amount"
+        android:hint="@string/amount"
+        android:inputType="number"/>
+
+    <Button
+        android:id="@+id/btnSubmitDonation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space8"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/submit_donation"
+        android:fontFamily="sans-serif"
+        android:textSize="@dimen/submitButton"
+        android:textAllCaps="false"/>
 </LinearLayout>

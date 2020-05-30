@@ -8,8 +8,8 @@ import me.androidbox.tamboon.presentation.screens.CharitiesFragment
 import me.androidbox.tamboon.presentation.screens.TamboonActivity
 import org.parceler.Parcels
 
-class CharitiesFragmentRouterImp(private val fragmentManager: FragmentManager) :
-    CharitiesFragmentRouter {
+class CharitiesFragmentRouterImp(private val fragmentManager: FragmentManager)
+    : CharitiesFragmentRouter {
 
     override fun gotoCharitiesFragment(charityList: List<Charity>) {
         val charitiesFragment = CharitiesFragment()

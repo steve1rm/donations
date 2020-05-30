@@ -3,4 +3,10 @@
     <string name="baseUrl" translatable="false">https://virtserver.swaggerhub.com/chakritw/tamboon-api/1.0.0/</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name_of_credit_card_holder">Name of credit card holder</string>
+    <string name="credit_card_number">Credit card number</string>
+    <string name="expired_date">Expired date</string>
+    <string name="security_code">Security code</string>
+    <string name="amount">Amount</string>
+    <string name="submit_donation">Submit donation</string>
 </resources>
