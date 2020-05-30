@@ -55,4 +55,9 @@ class TamboonViewModel(
     fun registerForCharities(): MutableLiveData<Charities> = charitiesData
 
     fun registerForDonations(): MutableLiveData<DonationResult> = donationData
+
+    override fun onCleared() {
+        compositeDisposable.dispose()
+        super.onCleared()
+    }
 }

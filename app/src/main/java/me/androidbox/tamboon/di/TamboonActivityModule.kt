@@ -9,6 +9,7 @@ import me.androidbox.tamboon.presentation.routers.CharitiesFragmentRouter
 import me.androidbox.tamboon.presentation.routers.CharitiesFragmentRouterImp
 import me.androidbox.tamboon.presentation.routers.LoadingFragmentRouter
 import me.androidbox.tamboon.presentation.routers.LoadingFragmentRouterImp
+import me.androidbox.tamboon.presentation.screens.CharitySelectedListener
 import me.androidbox.tamboon.presentation.screens.TamboonActivity
 import me.androidbox.tamboon.presentation.viewmodels.TamboonViewModel
 import me.androidbox.tamboon.scopes.ActivityScope
@@ -41,4 +42,9 @@ class TamboonActivityModule(private val tamboonActivity: TamboonActivity) {
     @Provides
     fun provideCharitiesFragmentRouter(): CharitiesFragmentRouter =
         CharitiesFragmentRouterImp(tamboonActivity.supportFragmentManager)
+
+
+    @ActivityScope
+    @Provides
+    fun provideCharitiesSelectedListener(): CharitySelectedListener = tamboonActivity
 }

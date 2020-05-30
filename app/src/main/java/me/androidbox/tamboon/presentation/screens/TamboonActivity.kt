@@ -14,7 +14,7 @@ import me.androidbox.tamboon.presentation.viewmodels.TamboonViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
-class TamboonActivity : AppCompatActivity() {
+class TamboonActivity : AppCompatActivity(), CharitySelectedListener {
 
     companion object {
         const val TAMBOON_CHARITY_KEY = "tamboonCharityKey"
@@ -43,9 +43,15 @@ class TamboonActivity : AppCompatActivity() {
         startLoading()
     }
 
+    override fun onCharitySelected(charity: Charity) {
+        // Go to donation
+        Timber.d(charity.name)
+    }
+
     private fun startLoading() = loadingFragmentRouter.gotoLoadingFragment()
 
-    private fun startCharities(charityList: List<Charity>) = charitiesFragmentRouter.goToCharitiesFragment(charityList)
+    private fun startCharities(charityList: List<Charity>)
+            = charitiesFragmentRouter.goToCharitiesFragment(charityList)
 
     private fun injectDependencies() {
         val tamboonActivitySubComponent = getTamboonApplicationComponent()

@@ -15,12 +15,16 @@ import me.androidbox.tamboon.di.TamboonApplication
 import me.androidbox.tamboon.di.TamboonApplicationComponent
 import me.androidbox.tamboon.presentation.adapter.CharitiesAdapter
 import org.parceler.Parcels
+import timber.log.Timber
 import javax.inject.Inject
 
 class CharitiesFragment : Fragment() {
 
     @Inject
     lateinit var charitiesAdapter: CharitiesAdapter
+
+    @Inject
+    lateinit var charitySelectedListener: CharitySelectedListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,8 +48,14 @@ class CharitiesFragment : Fragment() {
             rvCharities.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
             rvCharities.addItemDecoration(DividerItemDecoration(activity, LinearLayoutManager.VERTICAL))
             charitiesAdapter.populate(charities)
+            charitiesAdapter.setSelectedCharity(::onCharityClicked)
             charitiesAdapter.notifyDataSetChanged()
         }
+    }
+
+    private fun onCharityClicked(charity: Charity) {
+        Timber.d("charity: ${charity.name}")
+        charitySelectedListener.onCharitySelected(charity)
     }
 
     private fun injectDependencies() {

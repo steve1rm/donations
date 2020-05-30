@@ -10,10 +10,17 @@ import me.androidbox.tamboon.presentation.viewholders.CharitiesViewHolder
 class CharitiesAdapter : RecyclerView.Adapter<CharitiesViewHolder>() {
 
     private val charitiesList: MutableList<Charity> = mutableListOf()
+    private var selectedCharity: (Charity) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharitiesViewHolder {
-        return CharitiesViewHolder(
+        val charitiesViewHolder = CharitiesViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.charity_item, parent, false))
+
+        charitiesViewHolder.itemView.setOnClickListener {
+            selectedCharity(charitiesList[charitiesViewHolder.adapterPosition])
+        }
+
+        return charitiesViewHolder
     }
 
     override fun getItemCount(): Int = charitiesList.count()
@@ -25,5 +32,9 @@ class CharitiesAdapter : RecyclerView.Adapter<CharitiesViewHolder>() {
 
     fun populate(charities: List<Charity>) {
         this.charitiesList.addAll(charities)
+    }
+
+    fun setSelectedCharity(selectedCharity: (Charity) -> Unit) {
+        this.selectedCharity = selectedCharity
     }
 }
