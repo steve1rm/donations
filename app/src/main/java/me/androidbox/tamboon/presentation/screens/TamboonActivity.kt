@@ -9,6 +9,7 @@ import me.androidbox.tamboon.di.TamboonActivityModule
 import me.androidbox.tamboon.di.TamboonApplication
 import me.androidbox.tamboon.di.TamboonApplicationComponent
 import me.androidbox.tamboon.presentation.routers.CharitiesFragmentRouter
+import me.androidbox.tamboon.presentation.routers.DonationFragmentRouter
 import me.androidbox.tamboon.presentation.routers.LoadingFragmentRouter
 import me.androidbox.tamboon.presentation.viewmodels.TamboonViewModel
 import timber.log.Timber
@@ -18,6 +19,7 @@ class TamboonActivity : AppCompatActivity(), CharitySelectedListener {
 
     companion object {
         const val TAMBOON_CHARITY_KEY = "tamboonCharityKey"
+        const val TAMBOON_DONATION_KEY = "tamboonDonationKey"
     }
 
     @Inject
@@ -28,6 +30,9 @@ class TamboonActivity : AppCompatActivity(), CharitySelectedListener {
 
     @Inject
     lateinit var charitiesFragmentRouter: CharitiesFragmentRouter
+
+    @Inject
+    lateinit var donationFragmentRouter: DonationFragmentRouter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,14 +49,17 @@ class TamboonActivity : AppCompatActivity(), CharitySelectedListener {
     }
 
     override fun onCharitySelected(charity: Charity) {
-        // Go to donation
         Timber.d(charity.name)
+        startDonation(charity)
     }
 
     private fun startLoading() = loadingFragmentRouter.gotoLoadingFragment()
 
     private fun startCharities(charityList: List<Charity>)
-            = charitiesFragmentRouter.goToCharitiesFragment(charityList)
+            = charitiesFragmentRouter.gotoCharitiesFragment(charityList)
+
+    private fun startDonation(charity: Charity) =
+        donationFragmentRouter.gotoDonationFragment(charity)
 
     private fun injectDependencies() {
         val tamboonActivitySubComponent = getTamboonApplicationComponent()

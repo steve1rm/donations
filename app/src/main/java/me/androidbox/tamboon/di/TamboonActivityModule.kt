@@ -1,14 +1,12 @@
 package me.androidbox.tamboon.di
 
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProviders
 import dagger.Module
 import dagger.Provides
 import me.androidbox.tamboon.domain.interactors.RequestCharities
 import me.androidbox.tamboon.domain.interactors.RequestDonation
-import me.androidbox.tamboon.presentation.routers.CharitiesFragmentRouter
-import me.androidbox.tamboon.presentation.routers.CharitiesFragmentRouterImp
-import me.androidbox.tamboon.presentation.routers.LoadingFragmentRouter
-import me.androidbox.tamboon.presentation.routers.LoadingFragmentRouterImp
+import me.androidbox.tamboon.presentation.routers.*
 import me.androidbox.tamboon.presentation.screens.CharitySelectedListener
 import me.androidbox.tamboon.presentation.screens.TamboonActivity
 import me.androidbox.tamboon.presentation.viewmodels.TamboonViewModel
@@ -20,8 +18,9 @@ class TamboonActivityModule(private val tamboonActivity: TamboonActivity) {
 
     @ActivityScope
     @Provides
-    fun provideTamboonViewModel(requestCharities: RequestCharities,
-                                requestDonation: RequestDonation
+    fun provideTamboonViewModel(
+        requestCharities: RequestCharities,
+        requestDonation: RequestDonation
     ): TamboonViewModel {
         return ViewModelProviders.of(
             tamboonActivity,
@@ -43,6 +42,10 @@ class TamboonActivityModule(private val tamboonActivity: TamboonActivity) {
     fun provideCharitiesFragmentRouter(): CharitiesFragmentRouter =
         CharitiesFragmentRouterImp(tamboonActivity.supportFragmentManager)
 
+    @ActivityScope
+    @Provides
+    fun provideDonationsFragmentRouter(): DonationFragmentRouter =
+        DonationFragmentRouterImp(tamboonActivity.supportFragmentManager)
 
     @ActivityScope
     @Provides

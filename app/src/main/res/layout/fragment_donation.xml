@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_donation"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <co.omise.android.ui.OmiseEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <co.omise.android.ui.CardNameEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <co.omise.android.ui.CreditCardEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <co.omise.android.ui.ExpiryDateEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <co.omise.android.ui.SecurityCodeEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

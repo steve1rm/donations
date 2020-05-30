@@ -11,7 +11,7 @@ import org.parceler.Parcels
 class CharitiesFragmentRouterImp(private val fragmentManager: FragmentManager) :
     CharitiesFragmentRouter {
 
-    override fun goToCharitiesFragment(charityList: List<Charity>) {
+    override fun gotoCharitiesFragment(charityList: List<Charity>) {
         val charitiesFragment = CharitiesFragment()
 
         charitiesFragment.arguments = Bundle().apply {
