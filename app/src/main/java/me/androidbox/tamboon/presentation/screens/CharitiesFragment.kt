@@ -61,7 +61,7 @@ class CharitiesFragment : Fragment() {
 
     private fun injectDependencies() {
         val charitiesFragmentSubcomponent = getTamboonApplicationComponent()
-            .charitiesFragmentSubcomponent(FragmentModule(this@CharitiesFragment))
+            .fragmentSubcomponent(FragmentModule(this@CharitiesFragment))
 
         charitiesFragmentSubcomponent.inject(this@CharitiesFragment)
     }

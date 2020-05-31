@@ -33,7 +33,7 @@ class TamboonViewModel(
                     charitiesData.postValue(charities)
                 },
                 onError = {
-                    Timber.e(it.localizedMessage)
+                    Timber.e("failed to get list of ${it.localizedMessage}")
                 }
             ))
     }

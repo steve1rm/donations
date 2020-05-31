@@ -9,6 +9,6 @@ import javax.inject.Singleton
     NetworkModule::class])
 interface TamboonApplicationComponent {
     fun tamboonActivitySubcomponent(tamboonActivityModule: TamboonActivityModule): TamboonActivitySubcomponent
-    fun charitiesFragmentSubcomponent(fragmentModule: FragmentModule): FragmentSubcomponent
+    fun fragmentSubcomponent(fragmentModule: FragmentModule): FragmentSubcomponent
 }
 

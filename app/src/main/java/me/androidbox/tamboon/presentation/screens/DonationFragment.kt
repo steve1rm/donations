@@ -9,7 +9,6 @@ import co.omise.android.api.Client
 import co.omise.android.api.RequestListener
 import co.omise.android.models.CardParam
 import co.omise.android.models.Token
-import kotlinx.android.synthetic.main.charity_item.*
 import kotlinx.android.synthetic.main.fragment_donation.*
 import me.androidbox.tamboon.R
 import me.androidbox.tamboon.data.entities.Charity
@@ -18,7 +17,6 @@ import me.androidbox.tamboon.di.FragmentModule
 import me.androidbox.tamboon.di.TamboonApplication
 import me.androidbox.tamboon.di.TamboonApplicationComponent
 import me.androidbox.tamboon.presentation.screens.listeners.SubmitDonationListener
-import me.androidbox.tamboon.presentation.viewmodels.TamboonViewModel
 import org.parceler.Parcels
 import timber.log.Timber
 import java.util.*
@@ -81,7 +79,7 @@ class DonationFragment : Fragment() {
 
     private fun injectDependencies() {
         val charitiesFragmentSubcomponent = getTamboonApplicationComponent()
-            .charitiesFragmentSubcomponent(FragmentModule(this@DonationFragment))
+            .fragmentSubcomponent(FragmentModule(this@DonationFragment))
 
         charitiesFragmentSubcomponent.inject(this@DonationFragment)
     }

@@ -10,4 +10,6 @@
     <string name="amount">Amount</string>
     <string name="submit_donation">Submit donation</string>
     <string name="donation_successful">Donation successful</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="fetch_charities">Fetch charities</string>
 </resources>

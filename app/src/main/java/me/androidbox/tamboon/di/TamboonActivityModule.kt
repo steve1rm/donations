@@ -53,5 +53,10 @@ class TamboonActivityModule(private val tamboonActivity: TamboonActivity) {
 
     @ActivityScope
     @Provides
+    fun provideHomeMenuFragmentRouter(): HomeMenuFragmentRouter =
+        HomeMenuFragmentRouterImp(tamboonActivity.supportFragmentManager)
+
+    @ActivityScope
+    @Provides
     fun provideCharitiesSelectedListener(): CharitySelectedListener = tamboonActivity
 }
