@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import co.omise.android.api.Client
+import co.omise.android.api.Request
 import co.omise.android.api.RequestListener
 import co.omise.android.models.CardParam
 import co.omise.android.models.Token
@@ -67,14 +68,25 @@ class DonationFragment : Fragment() {
             })
 
             btnSubmitDonation.setOnClickListener {
-                submitDonationListener.onSubmitDonation(Donation(
-                    tvCharityName.text.toString(),
-                    token.toString(),
-                    etAmount.text.toString().toInt()))
+                if(shouldSendDonation(token)) {
+                    submitDonationListener.onSubmitDonation(
+                        Donation(
+                            tvCharityName.text.toString(),
+                            token.toString(),
+                            etAmount.text.toString().toInt()
+                        )
+                    )
+                }
             }
         } ?: run {
             /* Something went wrong handle case where arguments are null */
         }
+    }
+
+    private fun shouldSendDonation(token: Request<Token>): Boolean {
+        return tvCharityName.text.isNotEmpty() &&
+                token.toString().isNotEmpty() &&
+                etAmount.text.toString().isNotEmpty()
     }
 
     private fun injectDependencies() {
