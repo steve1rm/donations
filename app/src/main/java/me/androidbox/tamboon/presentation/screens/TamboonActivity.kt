@@ -69,7 +69,6 @@ class TamboonActivity : AppCompatActivity(),
 
     override fun onSubmitDonation(donation: Donation) {
         startLoading()
-        /* TODO Throttle the button clicking don't want to send too many requests */
         tamboonViewModel.submitDonation(donation)
     }
 
@@ -100,6 +99,17 @@ class TamboonActivity : AppCompatActivity(),
     }
 
     override fun onBackPressed() {
-        startHomeMenu()
+        val count = supportFragmentManager.backStackEntryCount
+        val fragment = supportFragmentManager.findFragmentById(R.id.activity_tamboon_container)
+
+        if(count == 1 && !fragment?.tag.equals(HomeMenuFragment::class.simpleName)) {
+            if(supportFragmentManager.findFragmentByTag(HomeMenuFragment::class.simpleName) != null) {
+                supportFragmentManager.popBackStack()
+                startHomeMenu()
+            }
+        }
+        else {
+            finish()
+        }
     }
 }

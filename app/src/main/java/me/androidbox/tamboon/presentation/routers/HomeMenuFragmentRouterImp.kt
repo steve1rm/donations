@@ -9,7 +9,8 @@ class HomeMenuFragmentRouterImp(private val fragmentManager: FragmentManager) : 
         fragmentManager.let {
             val fragmentTransaction = it.beginTransaction()
 
-            fragmentTransaction.replace(R.id.activity_tamboon_container, HomeMenuFragment(), "homeMenuFragment")
+            fragmentTransaction.replace(R.id.activity_tamboon_container, HomeMenuFragment(), HomeMenuFragment::class.simpleName)
+            fragmentTransaction.addToBackStack(HomeMenuFragment::class.simpleName)
             fragmentTransaction.commit()
         }
     }

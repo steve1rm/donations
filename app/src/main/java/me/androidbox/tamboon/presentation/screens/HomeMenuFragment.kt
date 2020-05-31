@@ -48,5 +48,4 @@ class HomeMenuFragment : Fragment() {
         /* Something bad happened !! we should not proceed */
         return (activity!!.application as TamboonApplication).tamboonApplicationComponent
     }
-
 }
