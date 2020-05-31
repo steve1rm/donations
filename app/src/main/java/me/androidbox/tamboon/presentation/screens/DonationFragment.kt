@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import co.omise.android.api.Request
-import co.omise.android.models.Model
 import co.omise.android.models.Token
 import kotlinx.android.synthetic.main.fragment_donation.*
 import me.androidbox.tamboon.R
@@ -17,11 +15,8 @@ import me.androidbox.tamboon.di.TamboonApplication
 import me.androidbox.tamboon.di.TamboonApplicationComponent
 import me.androidbox.tamboon.presentation.screens.listeners.SubmitDonationListener
 import me.androidbox.tamboon.utils.CreditCardTokenFactory
-import okhttp3.HttpUrl
 import org.parceler.Parcels
 import timber.log.Timber
-import java.lang.reflect.GenericDeclaration
-import java.lang.reflect.TypeVariable
 import java.util.*
 import javax.inject.Inject
 
@@ -68,6 +63,8 @@ class DonationFragment : Fragment() {
 
     fun onRequestFailed(throwable: Throwable) {
         Timber.e(throwable)
+        /* As I don't have a public key we will always fail.
+           For testing purposes we are going to mock this data */
         submitDonationRequest("token")
     }
 
