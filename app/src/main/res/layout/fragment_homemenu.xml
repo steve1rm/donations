@@ -5,15 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btnFetchCharities"
+    <TextView
+        android:id="@+id/tvTitleCharities"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/space8"
+        android:drawableStart="@drawable/ic_attach_money"
+        android:drawablePadding="@dimen/space8"
+        android:fontFamily="sans-serif-light"
+        android:text="Tamboon Charities"
+        android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/fetch_charities" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnFetchCharities"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/space8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleCharities"
+        android:text="@string/fetch_charities"
+        android:fontFamily="sans-serif"
+        android:textSize="@dimen/submitButton"
+        android:textAllCaps="false"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
