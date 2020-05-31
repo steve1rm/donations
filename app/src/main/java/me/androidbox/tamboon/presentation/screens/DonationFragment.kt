@@ -5,10 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import co.omise.android.api.Client
 import co.omise.android.api.Request
-import co.omise.android.api.RequestListener
-import co.omise.android.models.CardParam
+import co.omise.android.models.Model
 import co.omise.android.models.Token
 import kotlinx.android.synthetic.main.fragment_donation.*
 import me.androidbox.tamboon.R
@@ -18,14 +16,21 @@ import me.androidbox.tamboon.di.FragmentModule
 import me.androidbox.tamboon.di.TamboonApplication
 import me.androidbox.tamboon.di.TamboonApplicationComponent
 import me.androidbox.tamboon.presentation.screens.listeners.SubmitDonationListener
+import me.androidbox.tamboon.utils.CreditCardTokenFactory
+import okhttp3.HttpUrl
 import org.parceler.Parcels
 import timber.log.Timber
+import java.lang.reflect.GenericDeclaration
+import java.lang.reflect.TypeVariable
 import java.util.*
 import javax.inject.Inject
 
 class DonationFragment : Fragment() {
     @Inject
     lateinit var submitDonationListener: SubmitDonationListener
+
+    @Inject
+    lateinit var creditCardTokenFactory: CreditCardTokenFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,43 +52,42 @@ class DonationFragment : Fragment() {
 
             tvCharityName.text = charity.name
 
-            val client = Client(UUID.randomUUID().toString())
-            val cardParm = CardParam(
-                etCardName.cardName,
-                etCreditCard.cardNumber,
-                etExpiryDate.expiryMonth,
-                etExpiryDate.expiryYear,
-                etSecurityCode.securityCode)
-
-            val token = Token.CreateTokenRequestBuilder(cardParm).build()
-
-            client.send(token, object: RequestListener<Token> {
-                override fun onRequestFailed(throwable: Throwable) {
-                    Timber.e(throwable, throwable.localizedMessage)
-                }
-
-                override fun onRequestSucceed(model: Token) {
-                    Timber.d("onRequestSucceed $model")
-                }
-            })
-
             btnSubmitDonation.setOnClickListener {
-                if(shouldSendDonation(token)) {
-                    submitDonationListener.onSubmitDonation(
-                        Donation(
-                            tvCharityName.text.toString(),
-                            token.toString(),
-                            etAmount.text.toString().toInt()
-                        )
-                    )
-                }
+                creditCardTokenFactory.createTokenRequest(
+                    etCardName.cardName,
+                    etCreditCard.cardNumber,
+                    etExpiryDate.expiryMonth,
+                    etExpiryDate.expiryYear,
+                    etSecurityCode.securityCode,
+                    UUID.randomUUID().toString())
             }
         } ?: run {
             /* Something went wrong handle case where arguments are null */
         }
     }
 
-    private fun shouldSendDonation(token: Request<Token>): Boolean {
+    fun onRequestFailed(throwable: Throwable) {
+        Timber.e(throwable)
+        submitDonationRequest("token")
+    }
+
+    fun onRequestSuccess(token: Token) {
+       submitDonationRequest(token.toString())
+    }
+
+    private fun submitDonationRequest(token: String) {
+        if(shouldSendDonation(token)) {
+            submitDonationListener.onSubmitDonation(
+                Donation(
+                    tvCharityName.text.toString(),
+                    token,
+                    etAmount.text.toString().toInt()
+                )
+            )
+        }
+    }
+
+    private fun shouldSendDonation(token: String): Boolean {
         return tvCharityName.text.isNotEmpty() &&
                 token.toString().isNotEmpty() &&
                 etAmount.text.toString().isNotEmpty()

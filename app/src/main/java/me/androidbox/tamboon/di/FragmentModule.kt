@@ -7,13 +7,14 @@ import dagger.Provides
 import me.androidbox.tamboon.domain.interactors.RequestCharities
 import me.androidbox.tamboon.domain.interactors.RequestDonation
 import me.androidbox.tamboon.presentation.adapter.CharitiesAdapter
+import me.androidbox.tamboon.presentation.screens.DonationFragment
 import me.androidbox.tamboon.presentation.screens.listeners.CharitySelectedListener
 import me.androidbox.tamboon.presentation.screens.TamboonActivity
 import me.androidbox.tamboon.presentation.screens.listeners.FetchCharitiesListener
 import me.androidbox.tamboon.presentation.screens.listeners.SubmitDonationListener
 import me.androidbox.tamboon.presentation.viewmodels.TamboonViewModel
 import me.androidbox.tamboon.scopes.FragmentScope
-import me.androidbox.tamboon.utils.ViewModelProviderFactory
+import me.androidbox.tamboon.utils.*
 
 @Module
 class FragmentModule(private val fragment: Fragment) {
@@ -36,6 +37,19 @@ class FragmentModule(private val fragment: Fragment) {
     @Provides
     fun provideFetchCharitiesListener(): FetchCharitiesListener =
         fragment.activity as TamboonActivity
+
+    @FragmentScope
+    @Provides
+    fun provideCreditCardTokenFactoryImp(clientFactory: ClientFactory,
+                                         cardParamFactory: CardParamFactory): CreditCardTokenFactory {
+        val donationFragment = fragment as DonationFragment
+
+        return CreditCardTokenFactoryImp(
+            clientFactory,
+            cardParamFactory,
+            donationFragment::onRequestFailed,
+            donationFragment::onRequestSuccess)
+    }
 
     @FragmentScope
     @Provides
