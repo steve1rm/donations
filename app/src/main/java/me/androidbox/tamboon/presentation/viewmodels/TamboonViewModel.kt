@@ -34,6 +34,7 @@ class TamboonViewModel(
                 },
                 onError = {
                     Timber.e("failed to get list of ${it.localizedMessage}")
+                    charitiesData.postValue(Charities(0, emptyList()))
                 }
             ))
     }
@@ -50,6 +51,7 @@ class TamboonViewModel(
                 },
                 onError = {
                     Timber.e(it.localizedMessage)
+                    donationData.postValue(DonationResult(false, "", ""))
                 }
             ))
     }

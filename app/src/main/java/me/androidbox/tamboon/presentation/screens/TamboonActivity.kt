@@ -1,6 +1,7 @@
 package me.androidbox.tamboon.presentation.screens
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.activity_tamboon_container.*
@@ -51,12 +52,24 @@ class TamboonActivity : AppCompatActivity(),
 
         tamboonViewModel.registerForCharities().observe(this@TamboonActivity, Observer {
             Timber.d("Charities ${it.charityList}")
-            displayListOfCharities(it.charityList)
+            if(it.charityList.isNotEmpty()) {
+                displayListOfCharities(it.charityList)
+            }
+            else {
+                Toast.makeText(this@TamboonActivity, "Failed to retrieve charities", Toast.LENGTH_LONG).show()
+                startHomeMenu()
+            }
         })
 
         tamboonViewModel.registerForDonations().observe(this@TamboonActivity, Observer {
             Timber.d("DonationResult $it")
-            successFragmentRouter.gotoSuccessFragment()
+            if(it.isSuccess && it.errorCode.isNotEmpty() && it.errorMessage.isNotEmpty()) {
+                successFragmentRouter.gotoSuccessFragment()
+            }
+            else {
+                Toast.makeText(this@TamboonActivity, "Failed to submit donation", Toast.LENGTH_LONG).show()
+                startHomeMenu()
+            }
         })
 
         startHomeMenu()
