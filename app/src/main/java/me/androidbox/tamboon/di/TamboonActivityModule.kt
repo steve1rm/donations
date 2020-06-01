@@ -10,6 +10,7 @@ import me.androidbox.tamboon.presentation.screens.listeners.CharitySelectedListe
 import me.androidbox.tamboon.presentation.screens.TamboonActivity
 import me.androidbox.tamboon.presentation.viewmodels.TamboonViewModel
 import me.androidbox.tamboon.scopes.ActivityScope
+import me.androidbox.tamboon.utils.SchedulerProvider
 import me.androidbox.tamboon.utils.ViewModelProviderFactory
 
 @Module
@@ -19,14 +20,17 @@ class TamboonActivityModule(private val tamboonActivity: TamboonActivity) {
     @Provides
     fun provideTamboonViewModel(
         requestCharities: RequestCharities,
-        requestDonation: RequestDonation
+        requestDonation: RequestDonation,
+        schedulerProvider: SchedulerProvider
     ): TamboonViewModel {
         return ViewModelProviders.of(
             tamboonActivity,
             ViewModelProviderFactory(TamboonViewModel::class) {
                 TamboonViewModel(
                     requestCharities,
-                    requestDonation
+                    requestDonation,
+                    backgroundScheduler = schedulerProvider.background(),
+                    uiScheduler = schedulerProvider.ui()
                 )
             }).get(TamboonViewModel::class.java)
     }

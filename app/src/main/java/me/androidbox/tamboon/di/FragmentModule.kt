@@ -55,14 +55,17 @@ class FragmentModule(private val fragment: Fragment) {
     @Provides
     fun provideTamboonViewModel(
         requestCharities: RequestCharities,
-        requestDonation: RequestDonation
+        requestDonation: RequestDonation,
+        schedulerProvider: SchedulerProvider
     ): TamboonViewModel {
         return ViewModelProviders.of(
             fragment,
             ViewModelProviderFactory(TamboonViewModel::class) {
                 TamboonViewModel(
                     requestCharities,
-                    requestDonation
+                    requestDonation,
+                    backgroundScheduler = schedulerProvider.background(),
+                    uiScheduler = schedulerProvider.ui()
                 )
             }).get(TamboonViewModel::class.java)
     }

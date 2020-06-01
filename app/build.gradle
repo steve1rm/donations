@@ -47,6 +47,9 @@ dependencies {
     def omiseVersion = "3.0.0"
     def parcelerVersion = "1.1.12"
     def glideVersion = "4.11.0"
+    def assertJVersion = "3.11.1"
+    def mockitoKotlinVersion = "2.1.0"
+    def coreTestingVersion = "2.1.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -74,6 +77,9 @@ dependencies {
     kapt "com.github.bumptech.glide:compiler:$glideVersion"
 
     testImplementation 'junit:junit:4.12'
+    testImplementation "org.assertj:assertj-core:$assertJVersion"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion"
+    testImplementation "androidx.arch.core:core-testing:$coreTestingVersion"
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
