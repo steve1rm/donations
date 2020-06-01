@@ -10,6 +10,7 @@ class RequestCharitiesImp(private val tamboonService: TamboonService)
     : RequestCharities {
 
     override fun getCharities(): Single<Charities> {
-        return tamboonService.getCharities().timeout(3, TimeUnit.SECONDS)
+        return tamboonService.getCharities()
+            .timeout(30, TimeUnit.SECONDS)
     }
 }

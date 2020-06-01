@@ -46,6 +46,7 @@ dependencies {
     def lifecycleVersion = "2.2.0"
     def omiseVersion = "3.0.0"
     def parcelerVersion = "1.1.12"
+    def glideVersion = "4.11.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -69,7 +70,8 @@ dependencies {
     implementation "co.omise:omise-android:$omiseVersion"
     kapt "org.parceler:parceler:$parcelerVersion"
     implementation "org.parceler:parceler-api:$parcelerVersion"
-
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    kapt "com.github.bumptech.glide:compiler:$glideVersion"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

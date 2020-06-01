@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import co.omise.android.models.Token
 import kotlinx.android.synthetic.main.fragment_donation.*
@@ -82,11 +83,14 @@ class DonationFragment : Fragment() {
                 )
             )
         }
+        else {
+            Toast.makeText(activity, "Ensure all details are entered", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun shouldSendDonation(token: String): Boolean {
         return tvCharityName.text.isNotEmpty() &&
-                token.toString().isNotEmpty() &&
+                token.isNotEmpty() &&
                 etAmount.text.toString().isNotEmpty()
     }
 
