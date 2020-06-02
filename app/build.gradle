@@ -60,6 +60,9 @@ dependencies {
     def androidxJunitVersion = "1.1.1"
     def runnerVersion = "1.2.0"
     def robolectricVersion = "4.3"
+    def espressoCoreVersion = "3.2.0"
+    def kakaoVersion = "2.3.0"
+    def mockWebServerVersion = "3.14.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -99,5 +102,11 @@ dependencies {
     kaptTest "com.google.dagger:dagger-compiler:$daggerAndroidVersion"
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCoreVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$espressoCoreVersion"
+    androidTestImplementation "com.google.dagger:dagger:$daggerAndroidVersion"
+    androidTestImplementation "com.google.dagger:dagger-android-support:$daggerAndroidVersion"
+    kaptAndroidTest "com.google.dagger:dagger-compiler:$daggerAndroidVersion"
+    androidTestImplementation "com.agoda.kakao:kakao:$kakaoVersion"
+    androidTestImplementation "com.squareup.okhttp3:mockwebserver:$mockWebServerVersion"
 }
