@@ -27,13 +27,15 @@ class CharitiesAdapter : RecyclerView.Adapter<CharitiesViewHolder>() {
     override fun getItemCount(): Int = charitiesList.count()
 
     override fun onBindViewHolder(holder: CharitiesViewHolder, position: Int) {
-        holder.id.text = charitiesList[position].id.toString()
-        holder.name.text = charitiesList[position].name
+        if(charitiesList.isNotEmpty()) {
+            holder.id.text = charitiesList[position].id.toString()
+            holder.name.text = charitiesList[position].name
 
-        Glide.with(holder.itemView.context)
-            .load(charitiesList[position].logoUrl)
-            .placeholder(R.drawable.ic_launcher_background)
-            .into(holder.logo)
+            Glide.with(holder.itemView.context)
+                .load(charitiesList[position].logoUrl)
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(holder.logo)
+        }
     }
 
     fun populate(charities: List<Charity>) {
