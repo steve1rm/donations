@@ -32,6 +32,7 @@ class CharitiesAdapter : RecyclerView.Adapter<CharitiesViewHolder>() {
 
         Glide.with(holder.itemView.context)
             .load(charitiesList[position].logoUrl)
+            .placeholder(R.drawable.ic_launcher_background)
             .into(holder.logo)
     }
 

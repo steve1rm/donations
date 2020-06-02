@@ -31,6 +31,12 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
@@ -50,6 +56,10 @@ dependencies {
     def assertJVersion = "3.11.1"
     def mockitoKotlinVersion = "2.1.0"
     def coreTestingVersion = "2.1.0"
+    def androidxCoreVersion = "1.2.0"
+    def androidxJunitVersion = "1.1.1"
+    def runnerVersion = "1.2.0"
+    def robolectricVersion = "4.3"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -80,6 +90,14 @@ dependencies {
     testImplementation "org.assertj:assertj-core:$assertJVersion"
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion"
     testImplementation "androidx.arch.core:core-testing:$coreTestingVersion"
+    testImplementation "androidx.test:core:$androidxCoreVersion"
+    testImplementation "androidx.test.ext:junit:$androidxJunitVersion"
+    testImplementation "androidx.test:runner:$runnerVersion"
+    testImplementation "org.robolectric:robolectric:$robolectricVersion"
+    testImplementation "com.google.dagger:dagger:$daggerAndroidVersion"
+    testImplementation "com.google.dagger:dagger-android-support:$daggerAndroidVersion"
+    kaptTest "com.google.dagger:dagger-compiler:$daggerAndroidVersion"
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
