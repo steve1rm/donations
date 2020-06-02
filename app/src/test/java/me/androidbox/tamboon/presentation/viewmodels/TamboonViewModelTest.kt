@@ -20,6 +20,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import java.lang.Exception
+import java.util.concurrent.TimeUnit
 
 class TamboonViewModelTest {
 
@@ -63,11 +64,28 @@ class TamboonViewModelTest {
         val charities = createCharities(0)
 
         whenever(requestCharities.getCharities())
-            .thenReturn(Single.error(Exception("timeout exception")))
+            .thenReturn(Single.error(Exception("Something bad happened")))
 
         // Act
         tamboonViewModel.getListOfCharities()
         testScheduler.triggerActions()
+
+        assertThat(tamboonViewModel.registerForCharities().value)
+            .isEqualToComparingFieldByField(charities)
+    }
+
+
+    @Test
+    fun `should not retrieve charities after a timeout`() {
+        // Arrange
+        val charities = createCharities(0)
+
+        whenever(requestCharities.getCharities())
+            .thenReturn(Single.error(Exception("Timeout exception")))
+
+        // Act
+        tamboonViewModel.getListOfCharities()
+        testScheduler.advanceTimeBy(3L, TimeUnit.SECONDS)
 
         assertThat(tamboonViewModel.registerForCharities().value)
             .isEqualToComparingFieldByField(charities)
