@@ -33,9 +33,9 @@ class TamboonViewModelTest {
     private val testScheduler: TestScheduler = TestScheduler()
     private val charitiesObserver: Observer<Charities> = mock()
     private val donationObserver: Observer<DonationResult> = mock()
+
     @Before
     fun setUp() {
-
         tamboonViewModel = TamboonViewModel(
             requestCharities, requestDonation, testScheduler, testScheduler)
 
@@ -53,7 +53,8 @@ class TamboonViewModelTest {
         // Act
         tamboonViewModel.getListOfCharities()
         testScheduler.triggerActions()
-        
+
+        // Assert
         assertThat(tamboonViewModel.registerForCharities().value)
             .isEqualToComparingFieldByField(charities)
     }
@@ -70,6 +71,7 @@ class TamboonViewModelTest {
         tamboonViewModel.getListOfCharities()
         testScheduler.triggerActions()
 
+        // Assert
         assertThat(tamboonViewModel.registerForCharities().value)
             .isEqualToComparingFieldByField(charities)
     }
@@ -87,6 +89,7 @@ class TamboonViewModelTest {
         tamboonViewModel.getListOfCharities()
         testScheduler.advanceTimeBy(3L, TimeUnit.SECONDS)
 
+        // Assert
         assertThat(tamboonViewModel.registerForCharities().value)
             .isEqualToComparingFieldByField(charities)
     }
@@ -103,6 +106,7 @@ class TamboonViewModelTest {
         tamboonViewModel.submitDonation(donation)
         testScheduler.triggerActions()
 
+        // Assert
         assertThat(tamboonViewModel.registerForDonations().value)
             .isEqualToComparingFieldByField(donationResult)
     }
@@ -120,6 +124,7 @@ class TamboonViewModelTest {
         tamboonViewModel.submitDonation(donation)
         testScheduler.triggerActions()
 
+        // Assert
         assertThat(tamboonViewModel.registerForDonations().value)
             .isEqualToComparingFieldByField(donationResult)
     }
