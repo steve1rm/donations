@@ -45,7 +45,6 @@ class HomeMenuFragment : Fragment() {
     }
 
     private fun getTamboonApplicationComponent(): TamboonApplicationComponent {
-        /* Something bad happened !! we should not proceed */
-        return (activity!!.application as TamboonApplication).tamboonApplicationComponent
+        return (requireActivity().application as TamboonApplication).tamboonApplicationComponent
     }
 }

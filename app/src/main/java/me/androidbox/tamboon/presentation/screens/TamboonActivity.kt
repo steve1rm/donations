@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import kotlinx.android.synthetic.main.activity_tamboon_container.*
 import me.androidbox.tamboon.R
 import me.androidbox.tamboon.data.entities.Charity
 import me.androidbox.tamboon.data.entities.Donation
@@ -118,6 +117,7 @@ class TamboonActivity : AppCompatActivity(),
         /* We just want to finish when we are on the home screen if the user clicks back */
         if(count == 1 && !fragment?.tag.equals(HomeMenuFragment::class.simpleName)) {
             if(supportFragmentManager.findFragmentByTag(HomeMenuFragment::class.simpleName) != null) {
+                tamboonViewModel.cancelRequests()
                 supportFragmentManager.popBackStack()
                 startHomeMenu()
             }

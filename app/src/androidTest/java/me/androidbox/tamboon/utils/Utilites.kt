@@ -1,6 +1,6 @@
 package me.androidbox.tamboon.utils
 
-object Untilites {
+object Utilites {
 
     fun loadFromResources(path: String): String {
         this.javaClass.classLoader?.let {

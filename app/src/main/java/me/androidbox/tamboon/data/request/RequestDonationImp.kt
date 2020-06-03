@@ -12,6 +12,6 @@ class RequestDonationImp(private val tamboonService: TamboonService) : RequestDo
 
     override fun makeDonation(donation: Donation): Flowable<DonationResult> {
         return tamboonService.donate(donation)
-            .timeout(3, TimeUnit.SECONDS)
+            .timeout(10, TimeUnit.SECONDS)
     }
 }

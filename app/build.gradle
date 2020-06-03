@@ -94,6 +94,8 @@ dependencies {
     implementation "org.parceler:parceler-api:$parcelerVersion"
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     kapt "com.github.bumptech.glide:compiler:$glideVersion"
+    implementation "androidx.test.espresso:espresso-core:$espressoCoreVersion"
+    implementation "androidx.test.espresso:espresso-intents:$espressoCoreVersion"
 
     testImplementation 'junit:junit:4.12'
     testImplementation "org.assertj:assertj-core:$assertJVersion"

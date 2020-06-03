@@ -89,9 +89,9 @@ class DonationFragment : Fragment() {
     }
 
     private fun shouldSendDonation(token: String): Boolean {
-        return tvCharityName.text.isNotEmpty() &&
+        return tvCharityName != null && tvCharityName.text.isNotEmpty() &&
                 token.isNotEmpty() &&
-                etAmount.text.toString().isNotEmpty()
+                etAmount != null && etAmount.text.toString().isNotEmpty()
     }
 
     private fun injectDependencies() {
@@ -102,7 +102,6 @@ class DonationFragment : Fragment() {
     }
 
     private fun getTamboonApplicationComponent(): TamboonApplicationComponent {
-        /* Something bad happened !! we should not proceed */
-        return (activity!!.application as TamboonApplication).tamboonApplicationComponent
+        return (requireActivity().application as TamboonApplication).tamboonApplicationComponent
     }
 }
