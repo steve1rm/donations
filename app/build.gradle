@@ -37,6 +37,10 @@ android {
             includeAndroidResources = true
         }
     }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
@@ -63,6 +67,8 @@ dependencies {
     def espressoCoreVersion = "3.2.0"
     def kakaoVersion = "2.3.0"
     def mockWebServerVersion = "3.14.0"
+    def fragmentVersion = "1.2.4"
+    def mockitoVersion = "2.27.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -100,6 +106,8 @@ dependencies {
     testImplementation "com.google.dagger:dagger:$daggerAndroidVersion"
     testImplementation "com.google.dagger:dagger-android-support:$daggerAndroidVersion"
     kaptTest "com.google.dagger:dagger-compiler:$daggerAndroidVersion"
+    debugImplementation "androidx.fragment:fragment-testing:$fragmentVersion"
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCoreVersion"
