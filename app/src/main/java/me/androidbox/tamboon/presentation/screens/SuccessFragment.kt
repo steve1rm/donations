@@ -7,19 +7,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_success.*
 import me.androidbox.tamboon.R
+import me.androidbox.tamboon.databinding.FragmentSuccessBinding
 
 class SuccessFragment : Fragment() {
+    private lateinit var binding: FragmentSuccessBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
-
-        return inflater.inflate(R.layout.fragment_success, container, false)
+        binding = FragmentSuccessBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        btnDismiss.setOnClickListener {
+        binding.btnDismiss.setOnClickListener {
             activity?.onBackPressed()
         }
     }

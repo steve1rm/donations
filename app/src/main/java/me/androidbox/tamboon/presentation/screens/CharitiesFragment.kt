@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_charities.*
 import me.androidbox.tamboon.R
 import me.androidbox.tamboon.data.entities.Charity
+import me.androidbox.tamboon.databinding.FragmentCharitiesBinding
 import me.androidbox.tamboon.di.FragmentModule
 import me.androidbox.tamboon.di.TamboonApplication
 import me.androidbox.tamboon.di.TamboonApplicationComponent
@@ -27,15 +28,17 @@ class CharitiesFragment : Fragment() {
     @Inject
     lateinit var charitySelectedListener: CharitySelectedListener
 
+    private lateinit var binding: FragmentCharitiesBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         injectDependencies()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
+        binding = FragmentCharitiesBinding.inflate(inflater, container, false)
 
-        return inflater.inflate(R.layout.fragment_charities, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -45,9 +48,9 @@ class CharitiesFragment : Fragment() {
             val charities =
                 Parcels.unwrap<List<Charity>>(it.getParcelable(TamboonActivity.TAMBOON_CHARITY_KEY))
 
-            rvCharities.adapter = charitiesAdapter
-            rvCharities.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-            rvCharities.addItemDecoration(DividerItemDecoration(activity, LinearLayoutManager.VERTICAL))
+            binding.rvCharities.adapter = charitiesAdapter
+            binding.rvCharities.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+            binding.rvCharities.addItemDecoration(DividerItemDecoration(activity, LinearLayoutManager.VERTICAL))
             charitiesAdapter.populate(charities)
             charitiesAdapter.setSelectedCharity(::onCharityClicked)
             charitiesAdapter.notifyDataSetChanged()

@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.fragment_donation.*
 import me.androidbox.tamboon.R
 import me.androidbox.tamboon.data.entities.Charity
 import me.androidbox.tamboon.data.entities.Donation
+import me.androidbox.tamboon.databinding.FragmentDonationBinding
 import me.androidbox.tamboon.di.FragmentModule
 import me.androidbox.tamboon.di.TamboonApplication
 import me.androidbox.tamboon.di.TamboonApplicationComponent
@@ -28,15 +29,17 @@ class DonationFragment : Fragment() {
     @Inject
     lateinit var creditCardTokenFactory: CreditCardTokenFactory
 
+    private lateinit var binding: FragmentDonationBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         injectDependencies()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
+        binding = FragmentDonationBinding.inflate(inflater, container, false)
 
-        return inflater.inflate(R.layout.fragment_donation, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -46,15 +49,15 @@ class DonationFragment : Fragment() {
             val charity =
                 Parcels.unwrap<Charity>(it.getParcelable(TamboonActivity.TAMBOON_DONATION_KEY))
 
-            tvCharityName.text = charity.name
+            binding.tvCharityName.text = charity.name
 
-            btnSubmitDonation.setOnClickListener {
+            binding.btnSubmitDonation.setOnClickListener {
                 creditCardTokenFactory.createTokenRequest(
-                    etCardName.cardName,
-                    etCreditCard.cardNumber,
-                    etExpiryDate.expiryMonth,
-                    etExpiryDate.expiryYear,
-                    etSecurityCode.securityCode,
+                    binding.etCardName.cardName,
+                    binding.etCreditCard.cardNumber,
+                    binding.etExpiryDate.expiryMonth,
+                    binding.etExpiryDate.expiryYear,
+                    binding.etSecurityCode.securityCode,
                     UUID.randomUUID().toString())
             }
         } ?: run {
@@ -77,9 +80,9 @@ class DonationFragment : Fragment() {
         if(shouldSendDonation(token)) {
             submitDonationListener.onSubmitDonation(
                 Donation(
-                    tvCharityName.text.toString(),
+                    binding.tvCharityName.text.toString(),
                     token,
-                    etAmount.text.toString().toInt()
+                    binding.etAmount.text.toString().toInt()
                 )
             )
         }
@@ -89,9 +92,9 @@ class DonationFragment : Fragment() {
     }
 
     private fun shouldSendDonation(token: String): Boolean {
-        return tvCharityName != null && tvCharityName.text.isNotEmpty() &&
+        return binding.tvCharityName.text.isNotEmpty() &&
                 token.isNotEmpty() &&
-                etAmount != null && etAmount.text.toString().isNotEmpty()
+                binding.etAmount.text.toString().isNotEmpty()
     }
 
     private fun injectDependencies() {

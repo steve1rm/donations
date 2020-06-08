@@ -1,8 +1,10 @@
 package me.androidbox.tamboon.di
 
 import androidx.lifecycle.ViewModelProviders
+import androidx.viewbinding.ViewBinding
 import dagger.Module
 import dagger.Provides
+import me.androidbox.tamboon.databinding.FragmentHomemenuBinding
 import me.androidbox.tamboon.domain.interactors.RequestCharities
 import me.androidbox.tamboon.domain.interactors.RequestDonation
 import me.androidbox.tamboon.presentation.routers.*

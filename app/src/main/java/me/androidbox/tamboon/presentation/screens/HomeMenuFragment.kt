@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_homemenu.*
 import me.androidbox.tamboon.R
+import me.androidbox.tamboon.databinding.FragmentHomemenuBinding
 import me.androidbox.tamboon.di.FragmentModule
 import me.androidbox.tamboon.di.TamboonApplication
 import me.androidbox.tamboon.di.TamboonApplicationComponent
@@ -18,21 +19,23 @@ class HomeMenuFragment : Fragment() {
     @Inject
     lateinit var fetchCharitiesListener: FetchCharitiesListener
 
+    private lateinit var binding: FragmentHomemenuBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         injectDependencies()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
+        binding = FragmentHomemenuBinding.inflate(inflater, container, false)
 
-        return inflater.inflate(R.layout.fragment_homemenu, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        btnFetchCharities.setOnClickListener {
+        binding.btnFetchCharities.setOnClickListener {
             fetchCharitiesListener.onFetchCharities()
         }
     }
