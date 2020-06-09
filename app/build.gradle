@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
     compileSdkVersion 29
@@ -73,6 +74,7 @@ dependencies {
     def mockWebServerVersion = "3.14.0"
     def fragmentVersion = "1.2.4"
     def mockitoVersion = "2.27.0"
+    def navigationComponentVersion = "2.2.2"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -100,6 +102,8 @@ dependencies {
     kapt "com.github.bumptech.glide:compiler:$glideVersion"
     implementation "androidx.test.espresso:espresso-core:$espressoCoreVersion"
     implementation "androidx.test.espresso:espresso-intents:$espressoCoreVersion"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigationComponentVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigationComponentVersion"
 
     testImplementation 'junit:junit:4.12'
     testImplementation "org.assertj:assertj-core:$assertJVersion"

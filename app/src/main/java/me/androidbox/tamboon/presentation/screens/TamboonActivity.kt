@@ -1,6 +1,9 @@
 package me.androidbox.tamboon.presentation.screens
 
+import android.content.Context
 import android.os.Bundle
+import android.util.AttributeSet
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -49,16 +52,16 @@ class TamboonActivity : AppCompatActivity(),
         setContentView(R.layout.activity_tamboon_container)
         injectDependencies()
 
-        tamboonViewModel.registerForCharities().observe(this@TamboonActivity, Observer {
+     /*   tamboonViewModel.registerForCharities().observe(this@TamboonActivity, Observer {
             Timber.d("Charities ${it.charityList}")
             if(it.charityList.isNotEmpty()) {
-                displayListOfCharities(it.charityList)
+       //         displayListOfCharities(it.charityList)
             }
             else {
                 Toast.makeText(this@TamboonActivity, "Failed to retrieve charities", Toast.LENGTH_LONG).show()
-                startHomeMenu()
+       //         startHomeMenu()
             }
-        })
+        })*/
 
         tamboonViewModel.registerForDonations().observe(this@TamboonActivity, Observer {
             Timber.d("DonationResult $it")
@@ -71,7 +74,7 @@ class TamboonActivity : AppCompatActivity(),
             }
         })
 
-        startHomeMenu()
+   //     startHomeMenu()
     }
 
     override fun onCharitySelected(charity: Charity) {
@@ -85,8 +88,8 @@ class TamboonActivity : AppCompatActivity(),
     }
 
     override fun onFetchCharities() {
-        tamboonViewModel.getListOfCharities()
-        startLoading()
+     //   tamboonViewModel.getListOfCharities()
+     //   startLoading()
     }
 
     private fun startLoading() = loadingFragmentRouter.gotoLoadingFragment()
