@@ -33,12 +33,12 @@ class TamboonViewModel(
             .subscribeBy(
                 onSuccess = { charities ->
                     Timber.d("onSuccess $charities")
-                    charitiesData.postValue(charities)
+                    charitiesData.value = charities
                     EspressoIdlingResource.decrement()
                 },
                 onError = {
                     Timber.e("failed to get list of ${it.localizedMessage}")
-                    charitiesData.postValue(Charities(0, emptyList()))
+                    charitiesData.value = Charities(0, emptyList())
                     EspressoIdlingResource.decrement()
                 }
             ))
@@ -53,12 +53,12 @@ class TamboonViewModel(
             .subscribeBy(
                 onNext = { donationResult ->
                     Timber.d("onSuccess $donationResult")
-                    donationData.postValue(donationResult)
+                    donationData.value = donationResult
                     EspressoIdlingResource.decrement()
                 },
                 onError = {
                     Timber.e(it.localizedMessage)
-                    donationData.postValue(DonationResult(false, "", ""))
+                    donationData.value = DonationResult(false, "", "")
                     EspressoIdlingResource.decrement()
                 }
             ))
