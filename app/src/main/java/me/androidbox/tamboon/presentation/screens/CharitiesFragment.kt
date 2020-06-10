@@ -4,21 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
-import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import me.androidbox.tamboon.R
 import me.androidbox.tamboon.data.entities.Charity
 import me.androidbox.tamboon.databinding.FragmentCharitiesBinding
 import me.androidbox.tamboon.di.FragmentModule
 import me.androidbox.tamboon.di.TamboonApplication
 import me.androidbox.tamboon.di.TamboonApplicationComponent
 import me.androidbox.tamboon.presentation.adapter.CharitiesAdapter
-import me.androidbox.tamboon.presentation.screens.listeners.CharitySelectedListener
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -27,11 +23,7 @@ class CharitiesFragment : Fragment() {
     @Inject
     lateinit var charitiesAdapter: CharitiesAdapter
 
-    @Inject
-    lateinit var charitySelectedListener: CharitySelectedListener
-
     private lateinit var binding: FragmentCharitiesBinding
-
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,10 +39,6 @@ class CharitiesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         navController = Navigation.findNavController(view)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
 
         arguments?.let {
             if(!it.isEmpty) {
@@ -71,12 +59,13 @@ class CharitiesFragment : Fragment() {
                 charitiesAdapter.notifyDataSetChanged()
             }
         }
+
     }
 
     private fun onCharityClicked(charity: Charity) {
         Timber.d("charity: ${charity.name}")
-        // Start donation fragment
-        val navDestination = CharitiesFragmentDirections.actionCharitiesFragmentToDonationFragment(charity)
+        val navDestination =
+            CharitiesFragmentDirections.actionCharitiesFragmentToDonationFragment(charity)
         navController.navigate(navDestination)
     }
 
@@ -88,10 +77,9 @@ class CharitiesFragment : Fragment() {
     }
 
     private fun injectDependencies() {
-        val fragmentSubcomponent = getTamboonApplicationComponent()
+        getTamboonApplicationComponent()
             .fragmentSubcomponent(FragmentModule(this@CharitiesFragment))
-
-        fragmentSubcomponent.inject(this@CharitiesFragment)
+            .inject(this@CharitiesFragment)
     }
 
     private fun getTamboonApplicationComponent(): TamboonApplicationComponent {

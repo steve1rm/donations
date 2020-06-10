@@ -14,21 +14,17 @@ import me.androidbox.tamboon.databinding.FragmentDonationBinding
 import me.androidbox.tamboon.di.FragmentModule
 import me.androidbox.tamboon.di.TamboonApplication
 import me.androidbox.tamboon.di.TamboonApplicationComponent
-import me.androidbox.tamboon.presentation.screens.listeners.SubmitDonationListener
 import me.androidbox.tamboon.utils.CreditCardTokenFactory
 import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
 
 class DonationFragment : Fragment() {
-    @Inject
-    lateinit var submitDonationListener: SubmitDonationListener
 
     @Inject
     lateinit var creditCardTokenFactory: CreditCardTokenFactory
 
     private lateinit var binding: FragmentDonationBinding
-
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,13 +40,8 @@ class DonationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         navController = Navigation.findNavController(view)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
 
         arguments?.let {
-
             if(!it.isEmpty) {
                 val charity = DonationFragmentArgs.fromBundle(it).charity
 
@@ -105,10 +96,9 @@ class DonationFragment : Fragment() {
     }
 
     private fun injectDependencies() {
-        val charitiesFragmentSubcomponent = getTamboonApplicationComponent()
+        getTamboonApplicationComponent()
             .fragmentSubcomponent(FragmentModule(this@DonationFragment))
-
-        charitiesFragmentSubcomponent.inject(this@DonationFragment)
+            .inject(this@DonationFragment)
     }
 
     private fun getTamboonApplicationComponent(): TamboonApplicationComponent {

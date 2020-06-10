@@ -107,7 +107,6 @@ class LoadingFragment : Fragment() {
     }
 
     private fun injectDependencies() {
-        val fragmentSubcomponent =
             getTamboonApplicationComponent()
                 .fragmentSubcomponent(FragmentModule(this))
                 .inject(this)
