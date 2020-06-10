@@ -46,28 +46,25 @@ class HomeMenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val navController = Navigation.findNavController(view)
 
-        registerForCharities(navController)
+   //     registerForCharities(navController)
 
-        btnFetchCharities.setOnClickListener {
+        binding.btnFetchCharities.setOnClickListener {
             tapFetchCharities(navController)
         }
     }
 
     private fun tapFetchCharities(navController: NavController) {
-        tamboonViewModel.getListOfCharities()
         navController.navigate(R.id.action_homeMenuFragment_to_loadingFragment)
+     //   tamboonViewModel.getListOfCharities()
+
     }
 
     private fun registerForCharities(navController: NavController) {
         tamboonViewModel.registerForCharities().observe(viewLifecycleOwner, Observer {
             Timber.d("Charities ${it.charityList}")
             if(it.charityList.isNotEmpty()) {
-                val bundle = Bundle().apply {
-                    putParcelable(TamboonActivity.TAMBOON_CHARITY_KEY, Parcels.wrap(it.charityList))
-                }
-
-                val action = LoadingFragmentDirections.actionLoadingFragmentToCharitiesFragment(bundle)
-    //            navController.navigate(action)
+             //   val navDirection = HomeMenuFragmentDirections.actionHomeMenuFragmentToCharitiesFragment(it.charityList.toTypedArray())
+            //    navController.navigate(navDirection)
                 //        displayListOfCharities(it.charityList)
             }
             else {

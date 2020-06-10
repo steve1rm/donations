@@ -42,6 +42,10 @@ class CharitiesAdapter : RecyclerView.Adapter<CharitiesViewHolder>() {
         this.charitiesList.addAll(charities)
     }
 
+    fun clearCharitiesList() {
+        this.charitiesList.clear()
+    }
+
     fun setSelectedCharity(selectedCharity: (Charity) -> Unit) {
         this.selectedCharity = selectedCharity
     }
