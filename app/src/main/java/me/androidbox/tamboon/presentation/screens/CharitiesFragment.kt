@@ -47,19 +47,13 @@ class CharitiesFragment : Fragment() {
                 binding.rvCharities.adapter = charitiesAdapter
                 binding.rvCharities.layoutManager =
                     LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-                binding.rvCharities.addItemDecoration(
-                    DividerItemDecoration(
-                        activity,
-                        LinearLayoutManager.VERTICAL
-                    )
-                )
+                binding.rvCharities.addItemDecoration(DividerItemDecoration(activity, LinearLayoutManager.VERTICAL))
 
                 charitiesAdapter.populate(charities)
                 charitiesAdapter.setSelectedCharity(::onCharityClicked)
                 charitiesAdapter.notifyDataSetChanged()
             }
         }
-
     }
 
     private fun onCharityClicked(charity: Charity) {
