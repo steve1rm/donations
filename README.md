@@ -1,9 +1,9 @@
 # donations
 Sample App that demostrates navigation components
 
-[*] Dagger 2
-[*] Mockito
-[*] Junit tests
-[*] Kakao Automation Tests
-[*] View binding
-[*] Navigation components
+[ x ] Dagger 2
+[ x ] Mockito
+[ x ] Junit tests
+[ x ] Kakao Automation Tests
+[ x ] View binding
+[x ] Navigation components
