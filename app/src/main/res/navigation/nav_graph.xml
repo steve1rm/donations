@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeMenuFragment">
+
+    <fragment
+        android:id="@+id/homeMenuFragment"
+        android:name="me.androidbox.tamboon.presentation.screens.HomeMenuFragment"
+        android:label="HomeMenuFragment" >
+        <action
+            android:id="@+id/action_homeMenuFragment_to_loadingFragment"
+            app:destination="@id/loadingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/charitiesFragment"
+        android:name="me.androidbox.tamboon.presentation.screens.CharitiesFragment"
+        android:label="fragment_charities"
+        tools:layout="@layout/fragment_charities" >
+        <argument
+            android:name="charityList"
+            app:argType="me.androidbox.tamboon.data.entities.Charity[]" />
+        <action
+            android:id="@+id/action_charitiesFragment_to_homeMenuFragment"
+            app:destination="@id/homeMenuFragment" />
+        <action
+            android:id="@+id/action_charitiesFragment_to_donationFragment"
+            app:destination="@id/donationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loadingFragment"
+        android:name="me.androidbox.tamboon.presentation.screens.LoadingFragment"
+        android:label="LoadingFragment" >
+        <action
+            android:id="@+id/action_loadingFragment_to_charitiesFragment"
+            app:destination="@id/charitiesFragment"
+            app:popUpTo="@id/homeMenuFragment" />
+        <action
+            android:id="@+id/action_loadingFragment_to_homeMenuFragment"
+            app:destination="@id/homeMenuFragment" />
+        <action
+            android:id="@+id/action_loadingFragment_to_successFragment"
+            app:destination="@id/successFragment"
+            app:popUpTo="@id/homeMenuFragment" />
+        <argument
+            android:name="donation"
+            app:argType="me.androidbox.tamboon.data.entities.Donation" />
+    </fragment>
+    <fragment
+        android:id="@+id/donationFragment"
+        android:name="me.androidbox.tamboon.presentation.screens.DonationFragment"
+        android:label="DonationFragment" >
+        <argument
+            android:name="charity"
+            app:argType="me.androidbox.tamboon.data.entities.Charity" />
+        <action
+            android:id="@+id/action_donationFragment_to_loadingFragment"
+            app:destination="@id/loadingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/successFragment"
+        android:name="me.androidbox.tamboon.presentation.screens.SuccessFragment"
+        android:label="SuccessFragment" >
+        <action
+            android:id="@+id/action_successFragment_to_homeMenuFragment"
+            app:destination="@id/homeMenuFragment"
+            app:popUpTo="@id/homeMenuFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>

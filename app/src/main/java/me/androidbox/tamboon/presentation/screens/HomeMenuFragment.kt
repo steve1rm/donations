@@ -5,26 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_homemenu.*
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import me.androidbox.tamboon.R
 import me.androidbox.tamboon.databinding.FragmentHomemenuBinding
-import me.androidbox.tamboon.di.FragmentModule
-import me.androidbox.tamboon.di.TamboonApplication
-import me.androidbox.tamboon.di.TamboonApplicationComponent
-import me.androidbox.tamboon.presentation.screens.listeners.FetchCharitiesListener
-import javax.inject.Inject
 
 class HomeMenuFragment : Fragment() {
 
-    @Inject
-    lateinit var fetchCharitiesListener: FetchCharitiesListener
-
     private lateinit var binding: FragmentHomemenuBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        injectDependencies()
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentHomemenuBinding.inflate(inflater, container, false)
@@ -33,21 +21,14 @@ class HomeMenuFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        val navController = Navigation.findNavController(view)
 
         binding.btnFetchCharities.setOnClickListener {
-            fetchCharitiesListener.onFetchCharities()
+            tapFetchCharities(navController)
         }
     }
 
-    private fun injectDependencies() {
-        val fragmentSubcomponent = getTamboonApplicationComponent()
-            .fragmentSubcomponent(FragmentModule(this@HomeMenuFragment))
-
-        fragmentSubcomponent.inject(this@HomeMenuFragment)
-    }
-
-    private fun getTamboonApplicationComponent(): TamboonApplicationComponent {
-        return (requireActivity().application as TamboonApplication).tamboonApplicationComponent
+    private fun tapFetchCharities(navController: NavController) {
+        navController.navigate(R.id.action_homeMenuFragment_to_loadingFragment)
     }
 }
