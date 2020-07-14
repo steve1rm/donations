@@ -1,5 +1,6 @@
 package me.androidbox.tamboon.di
 
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import dagger.Module
 import dagger.Provides
@@ -21,7 +22,7 @@ class TamboonActivityModule(private val tamboonActivity: TamboonActivity) {
         requestDonation: RequestDonation,
         schedulerProvider: SchedulerProvider
     ): TamboonViewModel {
-        return ViewModelProviders.of(
+        return ViewModelProvider(
             tamboonActivity,
             ViewModelProviderFactory(TamboonViewModel::class) {
                 TamboonViewModel(

@@ -5,13 +5,13 @@ apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "me.androidbox.tamboon"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
@@ -29,6 +29,7 @@ android {
         targetCompatibility = 1.8
     }
 
+    /* Android 4.0 */
     buildFeatures {
         viewBinding = true
     }
@@ -43,6 +44,7 @@ android {
         jvmTarget = "1.8"
     }
 
+    /* Android 3.6.0 */
     viewBinding {
         enabled = true
     }
@@ -50,11 +52,11 @@ android {
 
 dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    def gsonVersion = "2.8.5"
-    def retrofitVersion = "2.5.0"
-    def daggerAndroidVersion = "2.27"
-    def okhttpVersion = "3.14.0"
-    def rxjavaVersion = "2.2.10"
+    def gsonVersion = "2.8.6"
+    def retrofitVersion = "2.9.0"
+    def daggerAndroidVersion = "2.28"
+    def okhttpVersion = "4.7.2"
+    def rxjavaVersion = "2.2.19"
     def rxAndroidVersion = "2.1.1"
     def rxkotlinVersion = "2.4.0"
     def timberVersion = "4.7.1"
@@ -68,13 +70,13 @@ dependencies {
     def androidxCoreVersion = "1.2.0"
     def androidxJunitVersion = "1.1.1"
     def runnerVersion = "1.2.0"
-    def robolectricVersion = "4.3"
+    def robolectricVersion = "4.3.1"
     def espressoCoreVersion = "3.2.0"
     def kakaoVersion = "2.3.0"
-    def mockWebServerVersion = "3.14.0"
-    def fragmentVersion = "1.2.4"
-    def mockitoVersion = "2.27.0"
-    def navigationComponentVersion = "2.2.2"
+    def mockWebServerVersion = "4.7.2"
+    def fragmentVersion = "1.2.5"
+    def mockitoVersion = "3.3.3"
+    def navigationComponentVersion = "2.3.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -105,7 +107,7 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationComponentVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationComponentVersion"
 
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
     testImplementation "org.assertj:assertj-core:$assertJVersion"
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion"
     testImplementation "androidx.arch.core:core-testing:$coreTestingVersion"

@@ -37,8 +37,6 @@ class CharitiesFragmentTest {
         charitiesFragment.arguments = Bundle().apply {
             putParcelable("Key", Parcels.wrap(charitiesList)) }
 
-//        doNothing().`when`(charitiesAdapter.populate(any()))
-
         // Act
         charitiesFragment.onViewCreated(View(ApplicationProvider.getApplicationContext()), Bundle())
 
