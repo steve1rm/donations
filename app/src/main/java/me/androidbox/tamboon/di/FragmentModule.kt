@@ -2,7 +2,6 @@ package me.androidbox.tamboon.di
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import dagger.Module
 import dagger.Provides
 import me.androidbox.tamboon.domain.interactors.RequestCharities
@@ -11,7 +10,12 @@ import me.androidbox.tamboon.presentation.adapter.CharitiesAdapter
 import me.androidbox.tamboon.presentation.screens.DonationFragment
 import me.androidbox.tamboon.presentation.viewmodels.TamboonViewModel
 import me.androidbox.tamboon.scopes.FragmentScope
-import me.androidbox.tamboon.utils.*
+import me.androidbox.tamboon.utils.CardParamFactory
+import me.androidbox.tamboon.utils.ClientFactory
+import me.androidbox.tamboon.utils.CreditCardTokenFactory
+import me.androidbox.tamboon.utils.CreditCardTokenFactoryImp
+import me.androidbox.tamboon.utils.SchedulerProvider
+import me.androidbox.tamboon.utils.ViewModelProviderFactory
 
 @Module
 class FragmentModule(private val fragment: Fragment) {
@@ -22,8 +26,10 @@ class FragmentModule(private val fragment: Fragment) {
 
     @FragmentScope
     @Provides
-    fun provideCreditCardTokenFactoryImp(clientFactory: ClientFactory,
-                                         cardParamFactory: CardParamFactory): CreditCardTokenFactory {
+    fun provideCreditCardTokenFactoryImp(
+        clientFactory: ClientFactory,
+        cardParamFactory: CardParamFactory
+    ): CreditCardTokenFactory {
         val donationFragment = fragment as DonationFragment
 
         return CreditCardTokenFactoryImp(

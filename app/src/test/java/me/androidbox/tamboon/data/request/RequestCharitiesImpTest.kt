@@ -5,7 +5,6 @@ import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Single
 import me.androidbox.tamboon.data.network.TamboonService
 import me.androidbox.tamboon.domain.interactors.RequestCharities
-import me.androidbox.tamboon.presentation.utils.DataFactory
 import me.androidbox.tamboon.presentation.utils.DataFactory.createCharities
 import org.junit.Before
 import org.junit.Test

@@ -1,8 +1,8 @@
 package me.androidbox.tamboon.di
 
 import dagger.Component
-import me.androidbox.tamboon.automation.TamboonActivityAndroidTest
 import javax.inject.Singleton
+import me.androidbox.tamboon.automation.TamboonActivityAndroidTest
 
 @Singleton
 @Component(modules = [

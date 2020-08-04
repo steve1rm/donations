@@ -27,7 +27,7 @@ class CharitiesAdapter : RecyclerView.Adapter<CharitiesViewHolder>() {
     override fun getItemCount(): Int = charitiesList.count()
 
     override fun onBindViewHolder(holder: CharitiesViewHolder, position: Int) {
-        if(charitiesList.isNotEmpty()) {
+        if (charitiesList.isNotEmpty()) {
             holder.id.text = charitiesList[position].id.toString()
             holder.name.text = charitiesList[position].name
 

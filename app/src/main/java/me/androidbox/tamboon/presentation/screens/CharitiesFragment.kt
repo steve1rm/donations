@@ -9,6 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import javax.inject.Inject
 import me.androidbox.tamboon.data.entities.Charity
 import me.androidbox.tamboon.databinding.FragmentCharitiesBinding
 import me.androidbox.tamboon.di.FragmentModule
@@ -16,7 +17,6 @@ import me.androidbox.tamboon.di.TamboonApplication
 import me.androidbox.tamboon.di.TamboonApplicationComponent
 import me.androidbox.tamboon.presentation.adapter.CharitiesAdapter
 import timber.log.Timber
-import javax.inject.Inject
 
 class CharitiesFragment : Fragment() {
 
@@ -41,7 +41,7 @@ class CharitiesFragment : Fragment() {
         navController = Navigation.findNavController(view)
 
         arguments?.let {
-            if(!it.isEmpty) {
+            if (!it.isEmpty) {
                 val charities = CharitiesFragmentArgs.fromBundle(it).charityList.toList()
 
                 binding.rvCharities.adapter = charitiesAdapter

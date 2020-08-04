@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
+import java.util.concurrent.TimeUnit
 import me.androidbox.tamboon.data.entities.Charities
 import me.androidbox.tamboon.data.entities.Donation
 import me.androidbox.tamboon.data.entities.DonationResult
@@ -12,14 +13,14 @@ import me.androidbox.tamboon.domain.interactors.RequestCharities
 import me.androidbox.tamboon.domain.interactors.RequestDonation
 import me.androidbox.tamboon.utils.EspressoIdlingResource
 import timber.log.Timber
-import java.util.concurrent.TimeUnit
 
 class TamboonViewModel(
     private val requestCharities: RequestCharities,
     private val requestDonation: RequestDonation,
     private val uiScheduler: Scheduler,
-    private val backgroundScheduler: Scheduler)
-    : ViewModel() {
+    private val backgroundScheduler: Scheduler
+) :
+    ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
     private val donationData = MutableLiveData<DonationResult>()

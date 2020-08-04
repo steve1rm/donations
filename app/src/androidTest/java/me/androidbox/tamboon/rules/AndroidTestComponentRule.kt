@@ -9,7 +9,7 @@ import org.junit.rules.TestRule
 import org.junit.runner.Description
 import org.junit.runners.model.Statement
 
-class AndroidTestComponentRule(private val context: Context): TestRule {
+class AndroidTestComponentRule(private val context: Context) : TestRule {
 
     private var androidTestComponent: AndroidTestComponent? = null
 
@@ -26,14 +26,13 @@ class AndroidTestComponentRule(private val context: Context): TestRule {
     }
 
     override fun apply(base: Statement?, description: Description?): Statement {
-        return object: Statement() {
+        return object : Statement() {
             @Throws(Throwable::class)
             override fun evaluate() {
                 try {
                     setupTestDependencies()
                     base?.evaluate()
-                }
-                finally {
+                } finally {
                     androidTestComponent = null
                 }
             }

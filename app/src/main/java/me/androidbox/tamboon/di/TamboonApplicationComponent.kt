@@ -11,4 +11,3 @@ interface TamboonApplicationComponent {
     fun tamboonActivitySubcomponent(tamboonActivityModule: TamboonActivityModule): TamboonActivitySubcomponent
     fun fragmentSubcomponent(fragmentModule: FragmentModule): FragmentSubcomponent
 }
-

@@ -1,7 +1,6 @@
 package me.androidbox.tamboon.di
 
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import dagger.Module
 import dagger.Provides
 import me.androidbox.tamboon.domain.interactors.RequestCharities

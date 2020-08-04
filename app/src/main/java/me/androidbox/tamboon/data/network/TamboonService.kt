@@ -16,5 +16,3 @@ interface TamboonService {
     @POST(TamboonServiceUrls.DONATIONS)
     fun donate(@Body donation: Donation): Flowable<DonationResult>
 }
-
-

@@ -5,7 +5,11 @@ import co.omise.android.api.Request
 import co.omise.android.api.RequestListener
 import co.omise.android.models.CardParam
 import co.omise.android.models.Token
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.doAnswer
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import me.androidbox.tamboon.presentation.utils.MockData.getInt
 import me.androidbox.tamboon.presentation.utils.MockData.getString
 import org.assertj.core.api.Assertions.assertThat

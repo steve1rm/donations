@@ -4,9 +4,9 @@ import android.app.Application
 import android.content.Context
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 import me.androidbox.tamboon.utils.SchedulerProvider
 import me.androidbox.tamboon.utils.SchedulerProviderImp
-import javax.inject.Singleton
 
 @Module
 class TamboonApplicationModule(private val application: Application) {

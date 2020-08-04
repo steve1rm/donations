@@ -6,11 +6,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import javax.inject.Inject
 import kotlinx.android.synthetic.main.inprogress.*
 import me.androidbox.tamboon.R
 import me.androidbox.tamboon.di.FragmentModule
@@ -18,12 +18,10 @@ import me.androidbox.tamboon.di.TamboonApplication
 import me.androidbox.tamboon.di.TamboonApplicationComponent
 import me.androidbox.tamboon.presentation.viewmodels.TamboonViewModel
 import timber.log.Timber
-import javax.inject.Inject
 
 class LoadingFragment : Fragment() {
     @Inject
     lateinit var tamboonViewModel: TamboonViewModel
-
 
     private val rotationAnimator: Animator by lazy<Animator> {
         AnimatorInflater.loadAnimator(activity, R.animator.loading_progress)
@@ -45,11 +43,10 @@ class LoadingFragment : Fragment() {
         val navController = Navigation.findNavController(view)
 
         arguments?.let { bundle ->
-            if(bundle.isEmpty) {
+            if (bundle.isEmpty) {
                 registerForCharities(navController)
                 tamboonViewModel.getListOfCharities()
-            }
-            else {
+            } else {
                 val donation = LoadingFragmentArgs.fromBundle(bundle).donation
                 registerForDonations(navController)
                 tamboonViewModel.submitDonation(donation)
@@ -61,12 +58,11 @@ class LoadingFragment : Fragment() {
         tamboonViewModel.registerForCharities().observe(viewLifecycleOwner, Observer {
             stopLoading()
             Timber.d("Charities ${it.charityList}")
-            if(it.charityList.isNotEmpty()) {
-                val navDirection
-                        = LoadingFragmentDirections.actionLoadingFragmentToCharitiesFragment(it.charityList.toTypedArray())
+            if (it.charityList.isNotEmpty()) {
+                val navDirection =
+                        LoadingFragmentDirections.actionLoadingFragmentToCharitiesFragment(it.charityList.toTypedArray())
                 navController.navigate(navDirection)
-            }
-            else {
+            } else {
                 gotoHomeMenu(navController)
             }
         })
@@ -89,13 +85,13 @@ class LoadingFragment : Fragment() {
     }
 
     private fun startLoading() {
-        if(!rotationAnimator.isRunning) {
+        if (!rotationAnimator.isRunning) {
             rotationAnimator.start()
         }
     }
 
     private fun stopLoading() {
-        if(rotationAnimator.isRunning) {
+        if (rotationAnimator.isRunning) {
             rotationAnimator.end()
         }
     }

@@ -16,7 +16,7 @@ class RequestDonationImpTest {
 
     @Before
     fun setUp() {
-       requestDonationImp  = RequestDonationImp(tamboonService)
+        requestDonationImp = RequestDonationImp(tamboonService)
     }
 
     @Test

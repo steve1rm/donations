@@ -21,6 +21,6 @@ class CharitiesScreen : Screen<CharitiesScreen>() {
     }
 
     val charities: KRecyclerView =
-        KRecyclerView( {
+        KRecyclerView({
             withId(R.id.rvCharities) }, { itemType(::Item) })
 }

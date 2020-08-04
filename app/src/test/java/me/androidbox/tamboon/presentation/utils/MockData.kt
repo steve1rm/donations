@@ -1,6 +1,6 @@
 package me.androidbox.tamboon.presentation.utils
 
-import java.util.*
+import java.util.UUID
 
 object MockData {
     fun getInt(): Int = (1..10000).shuffled().first()

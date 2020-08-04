@@ -4,5 +4,5 @@ import io.reactivex.Single
 import me.androidbox.tamboon.data.entities.Charities
 
 interface RequestCharities {
-    fun getCharities() : Single<Charities>
+    fun getCharities(): Single<Charities>
 }

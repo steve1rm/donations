@@ -1,6 +1,5 @@
 package me.androidbox.tamboon.pages
 
-import androidx.test.espresso.action.GeneralLocation
 import androidx.test.espresso.action.GeneralLocation.VISIBLE_CENTER
 import me.androidbox.tamboon.screens.DonationScreen
 

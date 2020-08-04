@@ -6,7 +6,6 @@ import androidx.test.platform.app.InstrumentationRegistry
 import me.androidbox.tamboon.pages.CharitiesPage
 import me.androidbox.tamboon.pages.DonationPage
 import me.androidbox.tamboon.pages.HomeMenuPage
-import me.androidbox.tamboon.pages.SuccessPage
 import me.androidbox.tamboon.presentation.screens.TamboonActivity
 import me.androidbox.tamboon.rules.AndroidTestComponentRule
 import me.androidbox.tamboon.utils.Utilites

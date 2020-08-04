@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import co.omise.android.models.Token
+import java.util.UUID
+import javax.inject.Inject
 import me.androidbox.tamboon.data.entities.Donation
 import me.androidbox.tamboon.databinding.FragmentDonationBinding
 import me.androidbox.tamboon.di.FragmentModule
@@ -16,8 +18,6 @@ import me.androidbox.tamboon.di.TamboonApplication
 import me.androidbox.tamboon.di.TamboonApplicationComponent
 import me.androidbox.tamboon.utils.CreditCardTokenFactory
 import timber.log.Timber
-import java.util.*
-import javax.inject.Inject
 
 class DonationFragment : Fragment() {
 
@@ -42,7 +42,7 @@ class DonationFragment : Fragment() {
         navController = Navigation.findNavController(view)
 
         arguments?.let {
-            if(!it.isEmpty) {
+            if (!it.isEmpty) {
                 val charity = DonationFragmentArgs.fromBundle(it).charity
 
                 binding.tvCharityName.text = charity.name
@@ -71,11 +71,11 @@ class DonationFragment : Fragment() {
     }
 
     fun onRequestSuccess(token: Token) {
-       submitDonationRequest(token.toString())
+        submitDonationRequest(token.toString())
     }
 
     private fun submitDonationRequest(token: String) {
-        if(shouldSendDonation(token)) {
+        if (shouldSendDonation(token)) {
             val navDirection = DonationFragmentDirections.actionDonationFragmentToLoadingFragment(
                 donation = Donation(
                 binding.tvCharityName.text.toString(),
@@ -83,8 +83,7 @@ class DonationFragment : Fragment() {
                 binding.etAmount.text.toString().toInt()))
 
             navController.navigate(navDirection)
-        }
-        else {
+        } else {
             Toast.makeText(activity, "Ensure all details are entered", Toast.LENGTH_LONG).show()
         }
     }

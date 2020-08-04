@@ -8,4 +8,5 @@ import kotlinx.android.parcel.Parcelize
 data class Donation(
     @SerializedName("name") val name: String,
     @SerializedName("token") val token: String,
-    @SerializedName("amount") val amount: Int) : Parcelable
+    @SerializedName("amount") val amount: Int
+) : Parcelable

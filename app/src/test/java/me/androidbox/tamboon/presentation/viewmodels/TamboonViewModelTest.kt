@@ -7,11 +7,12 @@ import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Flowable
 import io.reactivex.Single
 import io.reactivex.schedulers.TestScheduler
+import java.lang.Exception
+import java.util.concurrent.TimeUnit
 import me.androidbox.tamboon.data.entities.Charities
 import me.androidbox.tamboon.data.entities.DonationResult
 import me.androidbox.tamboon.domain.interactors.RequestCharities
 import me.androidbox.tamboon.domain.interactors.RequestDonation
-import me.androidbox.tamboon.presentation.utils.DataFactory
 import me.androidbox.tamboon.presentation.utils.DataFactory.createCharities
 import me.androidbox.tamboon.presentation.utils.DataFactory.createDonation
 import me.androidbox.tamboon.presentation.utils.DataFactory.createDonationResult
@@ -19,8 +20,6 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import java.lang.Exception
-import java.util.concurrent.TimeUnit
 
 class TamboonViewModelTest {
 
@@ -75,7 +74,6 @@ class TamboonViewModelTest {
         assertThat(tamboonViewModel.registerForCharities().value)
             .isEqualToComparingFieldByField(charities)
     }
-
 
     @Test
     fun `should not retrieve charities after a timeout`() {

@@ -4,6 +4,7 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
+import javax.inject.Named
 import me.androidbox.tamboon.BuildConfig
 import me.androidbox.tamboon.R
 import me.androidbox.tamboon.data.network.TamboonService
@@ -16,7 +17,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Named
 
 @Module
 class NetworkModule {
@@ -26,10 +26,9 @@ class NetworkModule {
     fun httpLoginInterceptor(): HttpLoggingInterceptor {
         val loggingInterceptor = HttpLoggingInterceptor()
 
-        loggingInterceptor.level = if(BuildConfig.DEBUG) {
+        loggingInterceptor.level = if (BuildConfig.DEBUG) {
             HttpLoggingInterceptor.Level.BODY
-        }
-        else {
+        } else {
             HttpLoggingInterceptor.Level.NONE
         }
 
